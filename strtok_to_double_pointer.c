@@ -1,69 +1,65 @@
+#include "shell.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-char **_free(char **list, int count)
+/**
+ * _free - free a double char pointer
+ * @list: the double char pointer
+ * @count: the number of single char pointers to free
+ */
+void _free(char **list, int count)
 {
-    for (; count >= 0; count--)
-        free(list[count]);
-    free(list);
-    return (NULL);
+	for (; count >= 0; count--)
+		do_mem(0, list[count]);
+	do_mem(0, list);
 }
 
+/**
+ * _strtok - split a string into a double char pointer
+ * @str: the string to split
+ * @delim: any characters to split the string by
+ * Return: the double char pointer
+ */
 char **_strtok(char *str, char *delim)
 {
-    int i, j, len, count = 0, check  = 0;
-    char **list;
+	int i, j, len, count = 0, check  = 0;
+	char **list;
 
-    for (i = 0, count = 0; str[i]; i++)
-    {
-        if (str[i] == delim[0] & check)
-        {
-            count++;
-            check = 0;
-        }
-        else if (str[i] != delim[0])
-            check = 1;
-    }
-    list = malloc(count);
-    if (!list)
-        return (NULL);
+	for (i = 0, count = 0; str[i]; i++)
+	{
+		if ((str[i] == delim[0]) && check)
+		{
+			count++;
+			check = 0;
+		}
+		else if (str[i] != delim[0])
+			check = 1;
+	}
+	list = do_mem(count, NULL);
+	if (!list)
+		return (NULL);
 
 
-    for (i = 0, len = 0, count = 0; str[i] || len; i++)
-    {
-        if ((str[i] == delim[0] || !str[i]) && len)
-        {
-            list[count] = malloc(sizeof(char) * len);
-            if (!list[count])
-                return (_free(list, count));
-            for (j = 0; len; len--, j++)
-                list[count][j] = str[i - len];
-            count++;
-            if (!str[i])
-                return (list);
-        }
-        else if (str[i] != delim[0])
-        {
-            len++;
-        }
-    }
-    return (NULL);
-}
-int main()
-{
-    char str[] = "Geeks for Geeks";
-
-    // Returns first token
-    int i = 0;
-    char **token = _strtok(str, " ");
-
-    // Keep printing tokens while one of the
-    // delimiters present in str[].
-    while (token[i] != NULL)
-    {
-        printf("%s\n", token[i]);
-        i++;
-    }
-
-    return 0;
+	for (i = 0, len = 0, count = 0; str[i] || len; i++)
+	{
+		if (((str[i] == delim[0]) || ((!str[i]) && len)))
+		{
+			list[count] = do_mem(sizeof(char) * len, NULL);
+			if (!list[count])
+			{
+				_free(list, count);
+				return (NULL);
+			}
+			for (j = 0; len; len--, j++)
+				list[count][j] = str[i - len];
+			count++;
+			if (!str[i])
+				return (list);
+		}
+		else if (str[i] != delim[0])
+		{
+			len++;
+		}
+	}
+	return (NULL);
 }

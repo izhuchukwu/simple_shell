@@ -11,7 +11,7 @@
   */
 int main(void)
 {
-	char *buff;
+	char *buff = NULL;
 	ssize_t lgetline, buffsize = 1024;
 
 	while (1)

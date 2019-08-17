@@ -6,7 +6,7 @@
  * do_mem - malloc, free, or free all with a static record
  * @size: the size to malloc if non-0
  * @ptr: the pointer to free if non-NULL
- * return: the malloc'd pointer if malloc, otherwise the result of free
+ * Return: the malloc'd pointer if malloc, otherwise the result of free
  */
 void *do_mem(size_t size, void *ptr)
 {
@@ -25,7 +25,7 @@ void *do_mem(size_t size, void *ptr)
 		len = list_len(all);
 		for (i = 0; i < len; i++)
 		{
-			if(get_node_at_index(all, i)->ptr == ptr)
+			if (get_node_at_index(all, i)->ptr == ptr)
 			{
 				delete_node_at_index(&all, i);
 			}
@@ -61,7 +61,7 @@ void do_exit(int fd, char *msg, int code)
 	}
 
 	/* nuke extra memory */
-	do_mem(0,NULL);
+	do_mem(0, NULL);
 
 	/* exit with code */
 	exit(code);
