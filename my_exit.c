@@ -30,8 +30,8 @@ void *do_mem(size_t size, void *ptr)
 				delete_node_at_index(&all, i);
 			}
 		}
-		ret = free(ptr);
-		return (ret);
+		free(ptr);
+		return (NULL);
 	}
 	else
 	{
