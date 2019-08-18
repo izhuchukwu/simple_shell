@@ -3,11 +3,11 @@
 #include <stdlib.h>
 
 /**
- * list_len - size of a list_t
- * @h: struct list_t, first node
+ * list_len - size of a list_s
+ * @h: struct list_s, first node
  * Return: number of nodes
  */
-size_t list_len(list_t *h)
+size_t list_len(list_s *h)
 {
 	int i = 0;
 
@@ -18,16 +18,16 @@ size_t list_len(list_t *h)
 
 
 /**
- * add_node - adds a new node at the beginning of a list_t list
- * @head: struct list_t, first node
+ * add_node - adds a new node at the beginning of a list_s list
+ * @head: struct list_s, first node
  * @ptr: the pointer data
- * Return: new list_t
+ * Return: new list_s
  */
-list_t *add_node(list_t **head, void *ptr)
+list_s *add_node(list_s **head, char *ptr)
 {
-	list_t *new = NULL;
+	list_s *new = NULL;
 
-	new = do_mem(sizeof(list_t), NULL);
+	new = do_mem(sizeof(list_s), NULL);
 	if (!new)
 	{
 		return (NULL);
@@ -41,15 +41,15 @@ list_t *add_node(list_t **head, void *ptr)
 
 /**
  * add_node_end - adds a new node at the end of a list_t list
- * @head: struct list_t, node
+ * @head: struct list_s, node
  * @ptr: the pointer data
- * Return: new list_t
+ * Return: new list_s
  */
-list_t *add_node_end(list_t **head, void *ptr)
+list_s *add_node_end(list_s **head, char *ptr)
 {
-	list_t *new = NULL, *last = NULL;
+	list_s *new = NULL, *last = NULL;
 
-	new = do_mem(sizeof(list_t), NULL);
+	new = do_mem(sizeof(list_s), NULL);
 	if (!new)
 	{
 		return (NULL);
@@ -72,12 +72,12 @@ list_t *add_node_end(list_t **head, void *ptr)
 }
 
 /**
- * free_list - frees list_t
- * @head: linked list , list_t
+ * free_list - frees list_s
+ * @head: linked list , list_s
  */
-void free_list(list_t *head)
+void free_list(list_s *head)
 {
-	list_t *hold = NULL;
+	list_s *hold = NULL;
 
 	while (head != NULL)
 	{

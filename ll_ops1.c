@@ -3,12 +3,12 @@
 #include <stdlib.h>
 
 /**
- * free_list_full - frees list_t and all contained pointers
- * @head: linked list , list_t
+ * free_list_full - frees list_s and all contained pointers
+ * @head: linked list , list_s
  */
-void free_list_full(list_t *head)
+void free_list_full(list_s *head)
 {
-	list_t *hold = NULL;
+	list_s *hold = NULL;
 
 	while (head != NULL)
 	{
@@ -25,7 +25,7 @@ void free_list_full(list_t *head)
  * @index: index
  * Return: the nth node
  */
-list_t *get_node_at_index(list_t *head, unsigned int index)
+list_s *get_node_at_index(list_s *head, unsigned int index)
 {
 	unsigned int i = 0;
 
@@ -42,14 +42,14 @@ list_t *get_node_at_index(list_t *head, unsigned int index)
  * @ptr: value for ptr
  * Return: address of new node or NULL if fails
  */
-list_t *insert_node_at_index(list_t **head, unsigned int idx, void *ptr)
+list_s *insert_node_at_index(list_s **head, unsigned int idx, char *ptr)
 {
-	list_t *new = NULL, *hold = *head;
+	list_s *new = NULL, *hold = *head;
 	unsigned int i = 0;
 
 	if (!idx)
 	{
-		new = do_mem(sizeof(list_t), NULL);
+		new = do_mem(sizeof(list_s), NULL);
 		if (!new)
 			return (NULL);
 
@@ -65,7 +65,7 @@ list_t *insert_node_at_index(list_t **head, unsigned int idx, void *ptr)
 	{
 		if (i == (idx - 1))
 		{
-			new = do_mem(sizeof(list_t), NULL);
+			new = do_mem(sizeof(list_s), NULL);
 			if (!new)
 				return (NULL);
 			(*new).ptr = ptr;
@@ -85,9 +85,9 @@ list_t *insert_node_at_index(list_t **head, unsigned int idx, void *ptr)
  * @index: index to be deleted
  * Return: 1 if succesful -1 if fails
  */
-int delete_node_at_index(list_t **head, unsigned int index)
+int delete_node_at_index(list_s **head, unsigned int index)
 {
-	list_t *hold = NULL, *delete = NULL;
+	list_s *hold = NULL, *delete = NULL;
 	unsigned int i = 0, action = 0;
 
 	if (!*head)
