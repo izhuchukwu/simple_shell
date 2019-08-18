@@ -35,9 +35,9 @@ char **_strtok(char *str, char *delim)
 		else if (str[i] != delim[0])
 			check = 1;
 	}
-	if (count == 0 && str)
+	if (str)
 		count++;
-	list = do_mem((count * sizeof(char *)), NULL);
+	list = (char **)do_mem((count + 1) * sizeof(char *), NULL);
 	if (!list)
 		return (NULL);
 
@@ -46,7 +46,7 @@ char **_strtok(char *str, char *delim)
 	{
 		if (((str[i] == delim[0]) || ((!str[i]) && len)))
 		{
-			list[count] = do_mem(sizeof(char) * len, NULL);
+			list[count] = (char *)do_mem(sizeof(char) * (len + 1), NULL);
 			if (!list[count])
 			{
 				_free(list, count);
@@ -54,6 +54,7 @@ char **_strtok(char *str, char *delim)
 			}
 			for (j = 0; len; len--, j++)
 				list[count][j] = str[i - len];
+			list[count][j] = '\0';
 			count++;
 			if (!str[i])
 			{
