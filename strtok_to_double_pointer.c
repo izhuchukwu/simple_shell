@@ -35,7 +35,9 @@ char **_strtok(char *str, char *delim)
 		else if (str[i] != delim[0])
 			check = 1;
 	}
-	list = do_mem(count, NULL);
+	if (count == 0 && str)
+		count++;
+	list = do_mem((count * sizeof(char *)), NULL);
 	if (!list)
 		return (NULL);
 
@@ -54,7 +56,10 @@ char **_strtok(char *str, char *delim)
 				list[count][j] = str[i - len];
 			count++;
 			if (!str[i])
+			{
+				list[count] = NULL;
 				return (list);
+			}
 		}
 		else if (str[i] != delim[0])
 		{
