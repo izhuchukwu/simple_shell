@@ -17,6 +17,8 @@ void *do_mem(size_t size, void *ptr)
 	if (size)
 	{
 		ret = malloc(size);
+		if (!ret)
+			return (NULL);
 		for (i = 0; (unsigned int)i < size; i++)
 			((char *)ret)[i] = 0;
 		add_node_end(&all, ret);
