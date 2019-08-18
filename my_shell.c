@@ -11,8 +11,9 @@
   */
 int main(void)
 {
-	char *buff = NULL;
+	char *buff = NULL, **tokens, *delim = " ";
 	ssize_t lgetline, buffsize = 1024;
+	int i;
 
 	while (1)
 	{
@@ -31,7 +32,12 @@ int main(void)
 		/* check for exit command */
 		if ((strcmp(buff, "exit\n")) == 0)
 			do_exit(2, "", 100);
-		write(STDOUT_FILENO, buff, lgetline);
+		tokens = _strtok(buff, delim); 
+		for (i = 0; tokens[i]; i++)
+		{
+			write(STDOUT_FILENO, tokens[i], strlen(tokens[i]));
+			write(STDOUT_FILENO, " ", 1);
+		}
 	}
 	do_mem(0, buff);
 	return (0);
