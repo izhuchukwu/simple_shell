@@ -22,7 +22,7 @@ void _free(char **list, int count)
  */
 char **_strtok(char *str, char *delim)
 {
-	int i, j, len, count = 0, check  = 0;
+	int i = 0, j = 0, len = 0, count = 0, check = 0;
 	char **list;
 
 	for (i = 0, count = 0; str[i]; i++)
@@ -40,8 +40,6 @@ char **_strtok(char *str, char *delim)
 	list = (char **)do_mem((count + 1) * sizeof(char *), NULL);
 	if (!list)
 		return (NULL);
-
-
 	for (i = 0, len = 0, count = 0; str[i] || len; i++)
 	{
 		if (((str[i] == delim[0]) || ((!str[i]) && len)))
@@ -63,9 +61,7 @@ char **_strtok(char *str, char *delim)
 			}
 		}
 		else if (str[i] != delim[0])
-		{
 			len++;
-		}
 	}
 	return (NULL);
 }

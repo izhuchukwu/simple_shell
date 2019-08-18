@@ -1,7 +1,6 @@
 #include "shell.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 /**
   * main - simple shell
@@ -30,12 +29,12 @@ int main(void)
 		}
 
 		/* check for exit command */
-		if ((strcmp(buff, "exit\n")) == 0)
+		if ((_strcmp(buff, "exit\n")) == 0)
 			do_exit(2, "", 100);
-		tokens = _strtok(buff, delim); 
+		tokens = _strtok(buff, delim);
 		for (i = 0; tokens[i]; i++)
 		{
-			write(STDOUT_FILENO, tokens[i], strlen(tokens[i]));
+			write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
 			write(STDOUT_FILENO, " ", 1);
 		}
 	}

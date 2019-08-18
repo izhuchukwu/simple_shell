@@ -1,7 +1,6 @@
 #include "shell.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 /**
  * free_list_full - frees list_t and all contained pointers

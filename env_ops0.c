@@ -22,7 +22,6 @@ char **get_path(char **env)
  */
 char *get_env_val(char **env, char *name)
 {
-	char *s = NULL;
 	int i = 0, j = 0;
 
 	while (env[i])

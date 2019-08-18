@@ -40,6 +40,15 @@ int delete_node_at_index(list_t **head, unsigned int index);
 /* Above find the linked list functions */
 
 
+/* Below find the string functions */
+
+int _strcmp(char *, char *);
+
+int _strlen(char *);
+
+/* Above find the string functions */
+
+
 void *do_mem(size_t size, void *ptr);
 
 void do_exit(int fd, char *msg, int code);
