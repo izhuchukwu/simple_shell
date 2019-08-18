@@ -9,8 +9,9 @@
 int main(void)
 {
 	/*
-	if (argc > 2)
-		return (-1); */
+	*if (argc > 2)
+	*	return (-1);
+	*/
 	/* check if argv[1] is a file */
 
 	/* signal handler */
