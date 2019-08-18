@@ -21,17 +21,17 @@ void *do_mem(size_t size, void *ptr)
 			return (NULL);
 		for (i = 0; (unsigned int)i < size; i++)
 			((char *)ret)[i] = 0;
-		add_node_end(&all, ret);
+		__add_node_end(&all, ret);
 		return (ret);
 	}
 	else if (ptr)
 	{
-		len = list_len(all);
+		len = __list_len(all);
 		for (i = 0; i < len; i++)
 		{
-			if (get_node_at_index(all, i)->ptr == ptr)
+			if (__get_node_at_index(all, i)->ptr == ptr)
 			{
-				delete_node_at_index(&all, i);
+				__delete_node_at_index(&all, i);
 			}
 		}
 		free(ptr);
@@ -40,7 +40,7 @@ void *do_mem(size_t size, void *ptr)
 	else
 	{
 		/* If neither size nor ptr, then nuke everything. */
-		free_list_full(all);
+		__free_list_full(all);
 		return (NULL);
 	}
 	return (NULL);
