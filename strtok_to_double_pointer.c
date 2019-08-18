@@ -25,21 +25,15 @@ char **_strtok(char *str, char *delim)
 	int i = 0, j = 0, len = 0, count = 0, check = 0;
 	char **list = NULL;
 
-	for (i = 0, count = 0; str[i]; i++)
-	{
-		if ((str[i] == delim[0]) && check)
-		{
-			count++;
-			check = 0;
-		}
-		else if (str[i] != delim[0])
-			check = 1;
-	}
-	if (str)
-		count++;
+	/* get count of words, if no words return NULL */
+	while (!(count = word_count(str, delim)))
+		return (NULL);
+
 	list = do_mem((count + 1) * sizeof(char *), NULL);
 	if (!list)
 		return (NULL);
+
+	/* tokenize str to individual words inside a double pointer*/
 	for (i = 0, len = 0, count = 0; str[i] || len; i++)
 	{
 		if (((str[i] == delim[0]) || ((!str[i]) && len)))
