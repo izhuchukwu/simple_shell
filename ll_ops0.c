@@ -27,7 +27,7 @@ list_t *add_node(list_t **head, void *ptr)
 {
 	list_t *new = NULL;
 
-	new = malloc(sizeof(list_t));
+	new = do_mem(sizeof(list_t), NULL);
 	if (!new)
 	{
 		return (NULL);
@@ -49,7 +49,7 @@ list_t *add_node_end(list_t **head, void *ptr)
 {
 	list_t *new = NULL, *last = NULL;
 
-	new = malloc(sizeof(list_t));
+	new = do_mem(sizeof(list_t), NULL);
 	if (!new)
 	{
 		return (NULL);
@@ -83,6 +83,6 @@ void free_list(list_t *head)
 	{
 		hold = head;
 		head = head->next;
-		free(hold);
+		do_mem(0, hold);
 	}
 }

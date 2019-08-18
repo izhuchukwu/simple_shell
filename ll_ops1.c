@@ -14,8 +14,8 @@ void free_list_full(list_t *head)
 	{
 		hold = head;
 		head = head->next;
-		free(hold->ptr);
-		free(hold);
+		do_mem(0, hold->ptr);
+		do_mem(0, hold);
 	}
 }
 
@@ -49,7 +49,7 @@ list_t *insert_node_at_index(list_t **head, unsigned int idx, void *ptr)
 
 	if (!idx)
 	{
-		new = malloc(sizeof(list_t));
+		new = do_mem(sizeof(list_t), NULL);
 		if (!new)
 			return (NULL);
 
@@ -65,7 +65,7 @@ list_t *insert_node_at_index(list_t **head, unsigned int idx, void *ptr)
 	{
 		if (i == (idx - 1))
 		{
-			new = malloc(sizeof(list_t));
+			new = do_mem(sizeof(list_t), NULL);
 			if (!new)
 				return (NULL);
 			(*new).ptr = ptr;
@@ -103,20 +103,20 @@ int delete_node_at_index(list_t **head, unsigned int index)
 	{
 		delete = (*hold).next;
 		(*hold).next = (*delete).next;
-		free(delete);
+		do_mem(0, delete);
 		return (1);
 	}
 	else if (!index && (**head).next)
 	{
 		delete = *head;
 		*head = (*delete).next;
-		free(delete);
+		do_mem(0, delete);
 		return (1);
 	}
 	else if (!index && *head)
 	{
 		*head = NULL;
-		free(*head);
+		do_mem(0, *head);
 		return (1);
 	}
 	return (-1);
