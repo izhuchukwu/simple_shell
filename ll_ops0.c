@@ -9,7 +9,7 @@
  */
 size_t list_len(list_t *h)
 {
-	int i;
+	int i = 0;
 
 	for (i = 0; h; i++, h = h->next)
 		;
@@ -25,7 +25,7 @@ size_t list_len(list_t *h)
  */
 list_t *add_node(list_t **head, void *ptr)
 {
-	list_t *new;
+	list_t *new = NULL;
 
 	new = malloc(sizeof(list_t));
 	if (!new)
@@ -47,7 +47,7 @@ list_t *add_node(list_t **head, void *ptr)
  */
 list_t *add_node_end(list_t **head, void *ptr)
 {
-	list_t *new, *last;
+	list_t *new = NULL, *last = NULL;
 
 	new = malloc(sizeof(list_t));
 	if (!new)
@@ -77,7 +77,7 @@ list_t *add_node_end(list_t **head, void *ptr)
  */
 void free_list(list_t *head)
 {
-	list_t *hold;
+	list_t *hold = NULL;
 
 	while (head != NULL)
 	{

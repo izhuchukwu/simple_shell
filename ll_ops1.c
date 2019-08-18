@@ -8,7 +8,7 @@
  */
 void free_list_full(list_t *head)
 {
-	list_t *hold;
+	list_t *hold = NULL;
 
 	while (head != NULL)
 	{
@@ -27,7 +27,7 @@ void free_list_full(list_t *head)
  */
 list_t *get_node_at_index(list_t *head, unsigned int index)
 {
-	unsigned int i;
+	unsigned int i = 0;
 
 	for (i = 0; head; i++, head = (*head).next)
 		if (i == index)
@@ -44,7 +44,7 @@ list_t *get_node_at_index(list_t *head, unsigned int index)
  */
 list_t *insert_node_at_index(list_t **head, unsigned int idx, void *ptr)
 {
-	list_t *new, *hold = *head;
+	list_t *new = NULL, *hold = *head;
 	unsigned int i = 0;
 
 	if (!idx)
@@ -87,8 +87,8 @@ list_t *insert_node_at_index(list_t **head, unsigned int idx, void *ptr)
  */
 int delete_node_at_index(list_t **head, unsigned int index)
 {
-	list_t *hold, *delete;
-	unsigned int i, action = 0;
+	list_t *hold = NULL, *delete = NULL;
+	unsigned int i = 0, action = 0;
 
 	if (!*head)
 		return (-1);

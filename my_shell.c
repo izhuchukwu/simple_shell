@@ -4,15 +4,13 @@
 
 /**
   * main - simple shell
-  *
-  *
   * Return: 0 if succesful
   */
 int main(void)
 {
-	char *buff = NULL, **tokens, *delim = " ";
-	ssize_t lgetline, buffsize = 1024;
-	int i;
+	char *buff = NULL, **tokens = NULL, *delim = " ";
+	ssize_t lgetline = 0, buffsize = 1024;
+	int i = 0;
 
 	while (1)
 	{
