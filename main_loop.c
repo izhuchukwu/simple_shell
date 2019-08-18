@@ -28,11 +28,15 @@ void main_loop(void)
 
 		/* tokenize STDIN */
 		tokens = _strtok(buff, delim);
+		
+		execute(tokens);
+		/*
 		for (i = 0; tokens[i]; i++)
 		{
 			write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
 			write(STDOUT_FILENO, " ", 1);
 		}
+		*/
 	}
 	/* clean memory */
 	do_mem(0, buff);

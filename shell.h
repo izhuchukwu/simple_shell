@@ -61,4 +61,12 @@ char **get_path(char **env);
 
 char *get_env_val(char **env, char *name);
 
+/* execute functions */
+
+int execute(char **tokens);
+
+int exec_nb(char **tokens);
+
+int exec_builtin(char **tokens);
+
 #endif /*SHELL_H*/
