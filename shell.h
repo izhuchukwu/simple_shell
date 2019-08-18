@@ -46,6 +46,8 @@ void do_exit(int fd, char *msg, int code);
 
 ssize_t _getline(char **lineptr, size_t n, int stream);
 
+char **_strtok(char *str, char *delim);
+
 char **get_path(char **env);
 
 char *get_env_val(char **env, char *name);
