@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+char *get_env_val(char **, char*);
+
 /**
  * get_path - get the path in a double char pointer
  * @env: the environment to get it from
@@ -34,7 +36,7 @@ char *get_env_val(char **env, char *name)
 		}
 		/* j only counts until null byte if name matches */
 		if (name[j] == '\0' && env[i][j] == '=')
-			return (env[i][j + 1]);
+			return ((env[i]) + j + 1);
 		i++;
 	}
 	return (NULL);
