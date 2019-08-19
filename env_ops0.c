@@ -40,18 +40,3 @@ char *get_env_val(char **env, char *name)
 	}
 	return (NULL);
 }
-
-char **copy_env(char **old)
-{
-	char **new = NULL;
-	int i = 0, outer_length = 0, j = 0, inner_length = 0;
-
-	if (!old)
-		return (do_mem(sizeof(char *), NULL));
-	for (outer_length = 0; old[outer_length]; outer_length++)
-		;
-	/*
-	for (i = 0; i < outer_length; )
-*/
-
-}
