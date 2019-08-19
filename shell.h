@@ -98,7 +98,7 @@ char *get_env_val(char **env, char *name);
 
 /* execute functions */
 
-int execute(char **tokens);
+int execute(char **tokens, int ops);
 
 int exec_nb(char **tokens);
 
