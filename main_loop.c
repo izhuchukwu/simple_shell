@@ -21,7 +21,9 @@ void main_loop(void)
 			do_mem(0, buff);
 			do_exit(2, "", -1);
 		}
-
+		/* exit if ctrl- d */
+		if (lgetline == 0)
+			do_exit(2, "",100);
 		/* check for exit command */
 		if ((_strcmp(buff, "exit\n")) == 0)
 			do_exit(2, "", 100);
