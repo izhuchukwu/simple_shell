@@ -50,7 +50,8 @@ char **copy_env(char **old)
 		return (do_mem(sizeof(char *), NULL));
 	for (outer_length = 0; old[outer_length]; outer_length++)
 		;
+	/*
 	for (i = 0; i < outer_length; )
-
+*/
 
 }
