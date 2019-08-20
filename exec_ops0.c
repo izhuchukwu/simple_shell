@@ -47,7 +47,7 @@ int exec_nb(char **tokens)
 	int i, checkOps = 0, pid = 0, res = 0;
 
 	envVars = get_path(environ);
-	comm = get_full_command(find_path(envVars, NULL), tokens[0]);
+	comm = get_full_command(find_path(envVars, tokens[0]), tokens[0]);
 
 	for (i = 0; envVars[i]; i++)
 	{
