@@ -74,6 +74,10 @@ list_s *insert_node_at_index(list_s **head, unsigned int idx, char *ptr);
 
 int delete_node_at_index(list_s **head, unsigned int index);
 
+char **arrayify(list_s *);
+
+list_s *listify(char **);
+
 /* Above find the linked list functions */
 
 
@@ -103,6 +107,10 @@ char *get_env_val(char **env, char *name);
 char *find_path(char **path, char *command);
 
 char * const *get_env();
+
+/* environment functions */
+
+char **do_env(char *, char *);
 
 /* execute functions */
 

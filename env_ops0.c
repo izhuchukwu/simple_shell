@@ -83,5 +83,5 @@ char *find_path(char **path, char *command)
 
 char * const *get_env()
 {
-	return (environ);
+	return ((char * const *)do_env(NULL, NULL));
 }
