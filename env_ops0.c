@@ -51,10 +51,12 @@ char *get_env_val(char **env, char *name)
 char *find_path(char **path, char *command)
 {
 	/* pointer for directory entry  & opendir returns a pointer of DIR type*/
-	struct dirent *de;
-	DIR *dr;
-	int i;
+	struct dirent *de = NULL;
+	DIR *dr = NULL;
+	int i = 0;
 
+	if (!command)
+		return (NULL);
 	/* MEMORY LEAK SOMEWHERE!!!!!!!!!!!!!! */
 	for (i = 0; path[i]; i++)
 	{
@@ -63,16 +65,19 @@ char *find_path(char **path, char *command)
 		if (!dr)
 		{
 			write(STDOUT_FILENO, "Could not open directory\n", 25);
+			closedir(dr);
 			return (NULL);
 		}
 		while ((de = readdir(dr)) != NULL)
 		{
-			write(STDOUT_FILENO, (*de).d_name, _strlen((*de).d_name));
-			write(STDOUT_FILENO, "   ", 3);
-			if ((*de).d_name == command)
+			if (_strcmp((*de).d_name, command) == 0)
+			{
+				closedir(dr);
 				return (path[i]);
+			}
 		}
 	}
+	closedir(dr);
 	return (NULL);
 }
 
