@@ -5,7 +5,7 @@
  */
 void main_loop(void)
 {
-	char *buff = NULL, **tokens = NULL, *delim = " ";
+	char *buff = NULL, **tokens = NULL, *delim = " \n";
 	ssize_t lgetline = 0, buffsize = 1024;
 	int i = 0;
 
@@ -31,14 +31,14 @@ void main_loop(void)
 		/* tokenize STDIN */
 		tokens = _strtok(buff, delim);
 
-		execute(tokens, 0);
-		/*
-		*for (i = 0; tokens[i]; i++)
-		*{
-		*	write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
-		*	write(STDOUT_FILENO, " ", 1);
-		*}
-		*/
+		//execute(tokens, 0);
+		
+		for (i = 0; tokens && tokens[i]; i++)
+		{
+			write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
+			write(STDOUT_FILENO, " ", 1);
+		}
+		
 	}
 	/* clean memory */
 	do_mem(0, buff);
