@@ -15,22 +15,39 @@ int exec_builtin(char **tokens)
 			write(STDOUT_FILENO, " ", 1);
 		write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
 	}
-	return (1);
+	return (0);
 
+}
+
+char *get_full_command(char *path, char *command)
+{
+	int i = 0, j = 0;
+	char *res = NULL;
+
+	/* if command has any / in it, then return command */
+	/* else, concat the path with the command and a slash */
+	i = _strlen(path);
+	j = _strlen(command);
+	res = do_mem(sizeof(char) * (i + j + 1 + 1), NULL);
+	_strcat(res, path);
+	_strcat(res, "/");
+	_strcat(res, command);
+	return (res);
 }
 
 /**
   * exec_nb - execute function for non builtins
   * @tokens: STDIN tokenized
-  * Return: 1 if succesful 0 if it fails
+  * Return: the exit status of the program, 0 if successful
   */
 int exec_nb(char **tokens)
 {
-	char **envVars;
-	int i, checkOps = 0;
+	char **envVars = NULL;
+	char *comm = NULL;
+	int i, checkOps = 0, pid = 0, res = 0;
 
 	envVars = get_path(environ);
-	find_path(envVars, NULL);
+	comm = get_full_command(find_path(envVars, NULL), tokens[0]);
 
 	for (i = 0; envVars[i]; i++)
 	{
@@ -38,7 +55,21 @@ int exec_nb(char **tokens)
 		write(STDOUT_FILENO, envVars[i], _strlen(envVars[i]));
 	}
 	write(STDOUT_FILENO, "\nnew\n", 5);
+
 	/* fork and exec */
+	pid = fork();
+	if (pid)
+	{
+		/* parent */
+		res = waitpid(pid);
+	}
+	if (!pid)
+	{
+		/* child */
+		execve(comm, tokens, get_env());
+		perror("exec error:");
+		do_exit(2, "Couldn't exec", 1);
+	}
 
 	/* print stdin minus command */
 	for (i = 1 ; tokens && tokens[0] && tokens[i]; i++)
@@ -50,7 +81,7 @@ int exec_nb(char **tokens)
 			write(STDOUT_FILENO, " ", 1);
 		write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
 	}
-	return (1);
+	return (res);
 }
 
 /**
@@ -101,7 +132,7 @@ int execute(char **tokens, int ops)
 		op = search_ops(tokens[i]);
 		if (op)
 			count++;
-		if (((op == 1) || (op == 2 && works) || (op == 3 && !works)) && count > ops)
+		if (((op == 1) || (op == 2 && !works) || (op == 3 && works)) && count > ops)
 		{
 			i++;
 			ops += 1;
@@ -110,4 +141,3 @@ int execute(char **tokens, int ops)
 	}
 	return (0);
 }
-

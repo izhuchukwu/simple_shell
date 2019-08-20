@@ -83,6 +83,8 @@ int _strcmp(char *, char *);
 
 int _strlen(char *);
 
+char *_strcat(char *, char *);
+
 /* Above find the string functions */
 
 
@@ -99,6 +101,8 @@ char **get_path(char **env);
 char *get_env_val(char **env, char *name);
 
 char *find_path(char **path, char *command);
+
+char * const *get_env();
 
 /* execute functions */
 
