@@ -23,7 +23,7 @@ void main_loop(void)
 		}
 		/* exit if ctrl- d */
 		if (lgetline == 0)
-			do_exit(2, "",100);
+			do_exit(2, "", 100);
 		/* check for exit command */
 		if ((_strcmp(buff, "exit\n")) == 0)
 			do_exit(2, "", 100);
@@ -31,14 +31,14 @@ void main_loop(void)
 		/* tokenize STDIN */
 		tokens = _strtok(buff, delim);
 
-		//execute(tokens, 0);
-		
-		for (i = 0; tokens && tokens[i]; i++)
-		{
-			write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
-			write(STDOUT_FILENO, " ", 1);
-		}
-		
+		execute(tokens, 0);
+		/*
+		*for (i = 0; tokens && tokens[i]; i++)
+		*{
+		*	write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
+		*	write(STDOUT_FILENO, " ", 1);
+		*}
+		*/
 	}
 	/* clean memory */
 	do_mem(0, buff);

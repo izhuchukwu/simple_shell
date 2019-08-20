@@ -44,10 +44,8 @@ int _strlen(char *s)
 	int len;
 
 	len = 0;
-	while (s[len] != '\0')
-	{
-		len = len + 1;
-	}
+	while (s && s[len] != '\0')
+		len++;
 	return (len);
 }
 
@@ -88,7 +86,9 @@ char *_strcat(char *dest, char *src)
 {
 	char *write;
 	char *s2;
-
+	/* [POSSIBLE BUG] if dest doesnt exist but src does should it return src? */
+	if (!dest || !src)
+		return (dest);
 	write = dest;
 	s2 = src;
 	for (; *write != '\0'; write++)

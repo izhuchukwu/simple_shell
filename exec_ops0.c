@@ -53,13 +53,6 @@ int exec_nb(char **tokens)
 	envVars = get_path(environ);
 	comm = get_full_command(find_path(envVars, tokens[0]), tokens[0]);
 
-	for (i = 0; envVars[i]; i++)
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		write(STDOUT_FILENO, envVars[i], _strlen(envVars[i]));
-	}
-	write(STDOUT_FILENO, "\nnew\n", 5);
-
 	/* fork and exec */
 	pid = fork();
 	if (pid)
@@ -83,7 +76,7 @@ int exec_nb(char **tokens)
 			break;
 		if (i != 1)
 			write(STDOUT_FILENO, " ", 1);
-		write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
+		//write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
 	}
 	return (res);
 }
