@@ -1,5 +1,5 @@
 #include "shell.h"
-
+#include <string.h>
 /**
   * exec_builtin - execute function for builtins
   * @tokens: STDIN tokenized
@@ -26,12 +26,18 @@ int exec_builtin(char **tokens)
   */
 int exec_nb(char **tokens)
 {
-	extern char **environ;
 	char **envVars;
 	int i, checkOps = 0;
 
 	envVars = get_path(environ);
+	find_path(envVars, NULL);
 
+	for (i = 0; envVars[i]; i++)
+	{
+		write(STDOUT_FILENO, "\n", 1);
+		write(STDOUT_FILENO, envVars[i], _strlen(envVars[i]));
+	}
+	write(STDOUT_FILENO, "\nnew\n", 5);
 	/* fork and exec */
 
 	/* print stdin minus command */
