@@ -22,7 +22,7 @@ void _free(char **list, int count)
  */
 char **_strtok(char *str, char *delim)
 {
-	int i = 0, j = 0, len = 0, count = 0, check = 0;
+	int i = 0, j = 0, d = 0, len = 0, count = 0, check = 0;
 	char **list = NULL;
 
 	/* get count of words, if no words return NULL */
@@ -34,28 +34,32 @@ char **_strtok(char *str, char *delim)
 		return (NULL);
 
 	/* tokenize str to individual words inside a double pointer*/
-	for (i = 0, len = 0, count = 0; str[i] || len; i++)
+	for (i = 0, len = 0, count = 0; str[i]; i++)
 	{
-		if (((str[i] == delim[0]) || ((!str[i]) && len)))
+		for (d = 0, check = 0; delim[d]; d++)
 		{
-			list[count] = do_mem(sizeof(char) * (len + 1), NULL);
-			if (!list[count])
+			if (((str[i] == delim[d]) || (!str[i])))
 			{
-				_free(list, count);
-				return (NULL);
+				check += 1;
+				if (len)
+				{
+					list[count] = do_mem(sizeof(char) * (len + 1), NULL);
+					if (!list[count])
+					{
+						_free(list, count);
+						return (NULL);
+					}
+					for (j = 0; len; len--, j++)
+						list[count][j] = str[i - len];
+					list[count][j] = '\0';
+					count++;
+				}
 			}
-			for (j = 0; len; len--, j++)
-				list[count][j] = str[i - len];
-			list[count][j] = '\0';
-			count++;
-			if (!str[i])
-			{
-				list[count] = NULL;
-				return (list);
-			}
+
 		}
-		else if (str[i] != delim[0])
+		if (!check)
 			len++;
 	}
-	return (NULL);
+	list[count] = NULL;
+	return (list);
 }
