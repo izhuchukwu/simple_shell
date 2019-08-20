@@ -76,8 +76,8 @@ char *find_path(char **path, char *command)
 				return (path[i]);
 			}
 		}
+		closedir(dr);
 	}
-	closedir(dr);
 	return (NULL);
 }
 
