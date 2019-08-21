@@ -8,18 +8,18 @@
   * @tokens: STDIN tokenized
   * Return: 1 if succesful 0 if it fails
   */
-int exec_builtin(char **tokens)
+int exec_builtin(char **tokens, int bcase)
 {
-	int i;
+	int exit = 0;
 
-	for (i = 1 ; tokens[i]; i++)
-	{
-		if (i != 1)
-			write(STDOUT_FILENO, " ", 1);
-		write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
+	switch (bcase){
+		case 1:
+			if (tokens[1])
+				exit = atoi(tokens[1]);
+			do_exit(2, "", exit);
+			return (1);
 	}
 	return (0);
-
 }
 
 char *get_full_command(char *path, char *command)
@@ -68,7 +68,7 @@ int exec_nb(char **tokens)
 	{
 		/* child */
 		execve(comm, tokens, get_env());
-		perror("exec error:");
+		perror("");
 		do_exit(2, "Couldn't exec", 1);
 	}
 	else
@@ -116,16 +116,17 @@ int execute(char **tokens, int ops)
 	int checkBuiltIn = 0, i, count, works = 0, op = 0;
 	static char **builtins;
 
-	builtins = do_mem(sizeof(char *), NULL);
-	builtins[0] = NULL;
+	builtins = do_mem(sizeof(char *) * 2, NULL);
+	builtins[0] = "exit";
+	builtins[1] = NULL;
 
 	/* check if its a builtin */
 	for (i = 0; builtins[i]; i++)
 		if (_strcmp(builtins[i], tokens[0]) == 0)
-			checkBuiltIn = 1;
+			checkBuiltIn = i + 1;
 
 	if (checkBuiltIn && tokens)
-		works = exec_builtin(tokens);
+		works = exec_builtin(tokens, checkBuiltIn);
 	else if (tokens)
 		works = exec_nb(tokens);
 	/* check for ;, &&, || */
