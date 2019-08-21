@@ -92,6 +92,8 @@ int word_count(char *str, char *delim);
 
 char *_strcat(char *, char *);
 
+int _atoi(char *s);
+
 /* Above find the string functions */
 
 
@@ -123,6 +125,6 @@ int exec_nb(char **tokens);
 
 int search_ops(char *token);
 
-int exec_builtin(char **tokens);
+int exec_builtin(char **tokens, int bcase);
 
 #endif /*SHELL_H*/
