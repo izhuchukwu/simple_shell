@@ -20,6 +20,7 @@ typedef struct list_p
 	struct list_p *next;
 } list_t;
 
+void main_loop(void);
 
 /* Below find the linked list functions for use with do_mem*/
 
@@ -87,6 +88,8 @@ int _strcmp(char *, char *);
 
 int _strlen(char *);
 
+int word_count(char *str, char *delim);
+
 char *_strcat(char *, char *);
 
 /* Above find the string functions */
@@ -117,6 +120,8 @@ char **do_env(char *, char *);
 int execute(char **tokens, int ops);
 
 int exec_nb(char **tokens);
+
+int search_ops(char *token);
 
 int exec_builtin(char **tokens);
 

@@ -1,5 +1,8 @@
 #include "shell.h"
 #include <string.h>
+#include <sys/wait.h>
+#include <stdio.h>
+#include <stdlib.h>
 /**
   * exec_builtin - execute function for builtins
   * @tokens: STDIN tokenized
@@ -48,37 +51,39 @@ int exec_nb(char **tokens)
 {
 	char **envVars = NULL;
 	char *comm = NULL;
-	int i, checkOps = 0, pid = 0, res = 0;
+	pid_t cpid, wid;
+	int status;
 
 	envVars = get_path(environ);
 	comm = get_full_command(find_path(envVars, tokens[0]), tokens[0]);
 
 	/* fork and exec */
-	pid = fork();
-	if (pid)
+	cpid = fork();
+	if (cpid == -1)
 	{
-		/* parent */
-		res = waitpid(pid);
+		perror("fork");
+		exit(EXIT_FAILURE); /* return 0? */
 	}
-	if (!pid)
+	if (!cpid)
 	{
 		/* child */
 		execve(comm, tokens, get_env());
 		perror("exec error:");
 		do_exit(2, "Couldn't exec", 1);
 	}
-
-	/* print stdin minus command */
-	for (i = 1 ; tokens && tokens[0] && tokens[i]; i++)
+	else
 	{
-		checkOps = search_ops(tokens[i]);
-		if (checkOps)
-			break;
-		if (i != 1)
-			write(STDOUT_FILENO, " ", 1);
-		//write(STDOUT_FILENO, tokens[i], _strlen(tokens[i]));
+		/* parent */
+		do {
+			wid = waitpid(cpid, &status, WUNTRACED);
+			if (wid == -1)
+			{
+				perror("waitpid");
+				exit(EXIT_FAILURE);/* return 0? */
+			}
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	return (res);
+	return (1);
 }
 
 /**
@@ -108,7 +113,7 @@ int search_ops(char *token)
   */
 int execute(char **tokens, int ops)
 {
-	int checkBuiltIn = 0, i, len, count, works = 0, op = 0;
+	int checkBuiltIn = 0, i, count, works = 0, op = 0;
 	static char **builtins;
 
 	builtins = do_mem(sizeof(char *), NULL);
