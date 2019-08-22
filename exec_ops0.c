@@ -118,7 +118,7 @@ int execute(char **tokens, int ops)
 	int checkBuiltIn = 0, i, count, works = 0, op = 0;
 	static char **builtins;
 
-	builtins = do_mem(sizeof(char *) * 2, NULL);
+	builtins = do_mem(sizeof(char *) * 3, NULL);
 	builtins[0] = "exit";
 	builtins[1] = "cd";
 	builtins[2] = NULL;
