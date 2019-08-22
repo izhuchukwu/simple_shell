@@ -11,8 +11,9 @@ void main_loop(void)
 
 	while (1)
 	{
-		/* isatty should be checked here (if true, print prompt) */
-		write(STDOUT_FILENO, "$ ", 2);
+		/* only print a prompt if isatty is true */
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "$ ", 2);
 		buff = do_mem(buffsize, NULL);
 
 		/* read command, getline and check if it fails */
