@@ -57,7 +57,6 @@ char *find_path(char **path, char *command)
 
 	if (!command)
 		return (NULL);
-	/* MEMORY LEAK SOMEWHERE!!!!!!!!!!!!!! */
 	for (i = 0; path[i]; i++)
 	{
 		dr = opendir(path[i]);
