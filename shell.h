@@ -127,4 +127,8 @@ int search_ops(char *token);
 
 int exec_builtin(char **tokens, int bcase);
 
+/* builtin functions */
+
+void cd_builtin(char **tokens);
+
 #endif /*SHELL_H*/
