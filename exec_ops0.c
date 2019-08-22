@@ -18,6 +18,8 @@ int exec_builtin(char **tokens, int bcase)
 				exit = atoi(tokens[1]);
 			do_exit(2, "", exit);
 			return (1);
+		case 2:
+			cd_builtin(tokens);
 	}
 	return (0);
 }
@@ -118,7 +120,8 @@ int execute(char **tokens, int ops)
 
 	builtins = do_mem(sizeof(char *) * 2, NULL);
 	builtins[0] = "exit";
-	builtins[1] = NULL;
+	builtins[1] = "cd";
+	builtins[2] = NULL;
 
 	/* check if its a builtin */
 	for (i = 0; builtins[i]; i++)
