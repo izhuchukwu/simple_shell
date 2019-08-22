@@ -1,6 +1,11 @@
 #include "shell.h"
 
-
+/**
+ * do_env - Get the env, or add a var, or delete a var
+ * @add: a variable to add
+ * @delete: a variable to delete
+ * Return: the current environment after any changes
+ */
 char **do_env(char *add, char *delete)
 {
 	static list_s *my_env;
