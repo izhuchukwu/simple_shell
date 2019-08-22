@@ -3,27 +3,36 @@
 #include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 /**
   * exec_builtin - execute function for builtins
   * @tokens: STDIN tokenized
+  * @bcase: which builtin to execute
   * Return: 1 if succesful 0 if it fails
   */
 int exec_builtin(char **tokens, int bcase)
 {
 	int exit = 0;
 
-	switch (bcase){
-		case 1:
-			if (tokens[1])
-				exit = atoi(tokens[1]);
-			do_exit(2, "", exit);
-			return (1);
-		case 2:
-			cd_builtin(tokens);
+	switch (bcase)
+	{
+	case 1:
+		if (tokens[1])
+			exit = atoi(tokens[1]);
+		do_exit(2, "", exit);
+		return (1);
+	case 2:
+		cd_builtin(tokens);
 	}
 	return (0);
 }
 
+/**
+ * get_full_command - get the command with the correct path prepended
+ * @path: all of the possible paths
+ * @command: the base command
+ * Return: the correct path + command (leave command alone if already done)
+ */
 char *get_full_command(char *path, char *command)
 {
 	int i = 0, j = 0;
