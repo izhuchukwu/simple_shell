@@ -9,7 +9,7 @@ void cd_builtin(char **tokens)
     char *HOME, *lastdir;
 
     lastdir = do_mem(100, NULL);
-    if (tokens[1] == "-")
+    if (tokens[1] == '-')
     {
         /* go to previous directory */
         chdir(lastdir);
