@@ -84,7 +84,7 @@ char *find_path(char **path, char *command)
  * get_env - get the current environment as a malloc'd, NULL terminating char**
  * Return: the environment as a char**
  */
-char **get_env(void)
+char **get_envir(void)
 {
 	return (do_env(NULL, NULL));
 }

@@ -69,7 +69,7 @@ int exec_nb(char **tokens)
 	if (!cpid)
 	{
 		/* child */
-		execve(comm, tokens, get_env());
+		execve(comm, tokens, (char * const *)get_envir());
 		perror("");
 		do_exit(2, "Couldn't exec", 1);
 	}

@@ -84,13 +84,13 @@ list_s *listify(char **);
 
 /* Below find the string functions */
 
-int _strcmp(char *, char *);
+int _strcmp(char *s1, char *s2);
 
-int _strlen(char *);
+int _strlen(char *s);
 
 int word_count(char *str, char *delim);
 
-char *_strcat(char *, char *);
+char *_strcat(char *s1, char *s2);
 
 int _atoi(char *s);
 
@@ -111,11 +111,17 @@ char *get_env_val(char **env, char *name);
 
 char *find_path(char **path, char *command);
 
-char * const *get_env();
+char **get_envir();
 
 /* environment functions */
 
-char **do_env(char *, char *);
+char **do_env(char *x, char *y);
+
+
+/* builtin functions */
+
+void cd_builtin(char **tokens);
+
 
 /* execute functions */
 
@@ -127,8 +133,5 @@ int search_ops(char *token);
 
 int exec_builtin(char **tokens, int bcase);
 
-/* builtin functions */
-
-void cd_builtin(char **tokens);
 
 #endif /*SHELL_H*/
