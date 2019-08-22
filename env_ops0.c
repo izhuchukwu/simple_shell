@@ -80,7 +80,11 @@ char *find_path(char **path, char *command)
 	return (NULL);
 }
 
-char * const *get_env()
+/**
+ * get_env - get the current environment as a malloc'd, NULL terminating char**
+ * Return: the environment as a char**
+ */
+char **get_env(void)
 {
-	return ((char * const *)do_env(NULL, NULL));
+	return (do_env(NULL, NULL));
 }
