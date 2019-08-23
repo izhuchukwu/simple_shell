@@ -23,6 +23,7 @@ int exec_builtin(char **tokens, int bcase)
 		return (1);
 	case 2:
 		cd_builtin(tokens);
+		return (1);
 	}
 	return (0);
 }
@@ -129,7 +130,7 @@ int execute(char **tokens, int ops)
 
 	/* split tokens into separate commands if ;,&&,|| exist */
 	commandSize = sizeof_command(tokens, ops);
-	extokens = do_mem(sizeof(char *) * commandSize, NULL);
+	extokens = do_mem(sizeof(char *) * (commandSize + 1), NULL);
 	for (i = 0; i < commandSize; i++)
 	{
 		extokens[i] = do_mem(_strlen(tokens[i]) + 1, NULL);
@@ -137,7 +138,7 @@ int execute(char **tokens, int ops)
 		for (count = 0; tokens[i][count]; count++)
 			extokens[i][count] = tokens[i][count];
 	}
-
+	extokens[i] = NULL;
 	builtins = get_builtins();
 
 	/* check if its a builtin */
@@ -155,7 +156,7 @@ int execute(char **tokens, int ops)
 		op = search_ops(tokens[i]);
 		if (op)
 			count++;
-		if (((op == 1) || (op == 2 && !works) || (op == 3 && works)) && count > ops)
+		if (((op == 1) || (op == 2 && works) || (op == 3 && !works)) && count > ops)
 		{
 			i++;
 			ops += 1;
