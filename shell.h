@@ -122,6 +122,7 @@ char **do_env(char *x, char *y);
 
 void cd_builtin(char **tokens);
 
+char **get_builtins();
 
 /* execute functions */
 

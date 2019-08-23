@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <stdio.h>
 
 /**
   * _atoi - converst a string to an integer
@@ -40,4 +41,25 @@ int _atoi(char *s)
 		}
 	}
 	return (num);
+}
+
+/**
+  *
+  *
+  *
+  */
+int sizeof_command(char **tokens, int place)
+{
+	int count, i;
+
+	for (i = 0, count = 0; tokens && tokens[i]; i++)
+	{
+		if (search_ops(tokens[i]))
+		{
+			count++;
+		}
+		if (count > place)
+			break;
+	}
+	return (i);
 }

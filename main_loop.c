@@ -6,6 +6,7 @@
 void main_loop(void)
 {
 	char *buff = NULL, **tokens = NULL, *delim = " \n";
+	static char *history;
 	ssize_t lgetline = 0, buffsize = 1024;
 	/*int i = 0;*/
 

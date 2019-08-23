@@ -124,13 +124,21 @@ int search_ops(char *token)
   */
 int execute(char **tokens, int ops)
 {
-	int checkBuiltIn = 0, i, count, works = 0, op = 0;
-	static char **builtins;
+	int checkBuiltIn = 0, i, count, works = 0, op = 0, commandSize = 0;
+	char **builtins, **extokens;
 
-	builtins = do_mem(sizeof(char *) * 3, NULL);
-	builtins[0] = "exit";
-	builtins[1] = "cd";
-	builtins[2] = NULL;
+	/* split tokens into separate commands if ;,&&,|| exist */
+	commandSize = sizeof_command(tokens, ops);
+	extokens = do_mem(sizeof(char *) * commandSize, NULL);
+	for (i = 0; i < commandSize; i++)
+	{
+		extokens[i] = do_mem(_strlen(tokens[i]) + 1, NULL);
+		/* replace with strcopy function */
+		for (count = 0; tokens[i][count]; count++)
+			extokens[i][count] = tokens[i][count];
+	}
+
+	builtins = get_builtins();
 
 	/* check if its a builtin */
 	for (i = 0; builtins[i]; i++)
@@ -138,9 +146,9 @@ int execute(char **tokens, int ops)
 			checkBuiltIn = i + 1;
 
 	if (checkBuiltIn && tokens)
-		works = exec_builtin(tokens, checkBuiltIn);
+		works = exec_builtin(extokens, checkBuiltIn);
 	else if (tokens)
-		works = exec_nb(tokens);
+		works = exec_nb(extokens);
 	/* check for ;, &&, || */
 	for (i = 0, count = 0; tokens && tokens[i]; i++)
 	{

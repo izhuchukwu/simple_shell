@@ -1,6 +1,24 @@
 #include "shell.h"
 
 /**
+  * get_builtins - list of builtin commands
+  * Return - double pointer holding list of commands
+  */
+char **get_builtins()
+{
+	char **builtins;
+
+	builtins = do_mem(sizeof(char *) * 3, NULL);
+
+	builtins[0] = "exit";
+	builtins[1] = "cd";
+	builtins[2] = NULL;
+
+	return (builtins);
+}
+
+
+/**
  * cd_builtin - executes cd function, changes directory
  * @tokens: command input into prompt tokenized
  */
@@ -18,6 +36,8 @@ void cd_builtin(char **tokens)
 		/* go to previous directory */
 		getcwd(templd, 100);
 		chdir(lastdir);
+		write(STDOUT_FILENO, lastdir, _strlen(lastdir));
+		write(STDOUT_FILENO, "\n", 1);
 		lastdir = templd;
 	}
 	else if (tokens[1])
