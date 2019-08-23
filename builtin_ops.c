@@ -6,14 +6,19 @@
  */
 void cd_builtin(char **tokens)
 {
-	char *HOME = NULL, *lastdir = NULL;
+	char *HOME = NULL, *templd;
+	static char *lastdir;
 
 	(void)HOME;
-	lastdir = do_mem(100, NULL);
+	if (!lastdir)
+		lastdir = do_mem(100, NULL);
+	templd = do_mem(100, NULL);
 	if (tokens[1] && _strcmp(tokens[1], "-") == 0)
 	{
 		/* go to previous directory */
+		getcwd(templd, 100);
 		chdir(lastdir);
+		lastdir = templd;
 	}
 	else if (tokens[1])
 	{
