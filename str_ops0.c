@@ -102,3 +102,21 @@ char *_strcat(char *dest, char *src)
 	*write = '\0';
 	return (dest);
 }
+
+/**
+  * _strcpy - copy src into dest
+  * @dest: destination for copied string
+  * @src: string to copy
+  * Return: copied string
+  */
+char *_strcpy(char *dest, char *src)
+{
+	int i;
+
+	for (i = 0; i <= _strlen(src); i++)
+	{
+		dest[i] = src[i];
+	}
+	
+	return (dest);
+}

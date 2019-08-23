@@ -92,7 +92,11 @@ int word_count(char *str, char *delim);
 
 char *_strcat(char *s1, char *s2);
 
+char *_strcpy(char *dest, char *src);
+
 int _atoi(char *s);
+
+int sizeof_command(char **tokens, int place);
 
 /* Above find the string functions */
 

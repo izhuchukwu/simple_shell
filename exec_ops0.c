@@ -134,9 +134,8 @@ int execute(char **tokens, int ops)
 	for (i = 0; i < commandSize; i++)
 	{
 		extokens[i] = do_mem(_strlen(tokens[i]) + 1, NULL);
-		/* replace with strcopy function */
-		for (count = 0; tokens[i][count]; count++)
-			extokens[i][count] = tokens[i][count];
+
+		_strcpy(extokens[i], tokens[i]);
 	}
 	extokens[i] = NULL;
 	builtins = get_builtins();
