@@ -20,7 +20,7 @@ typedef struct list_p
 	struct list_p *next;
 } list_t;
 
-void main_loop(void);
+void main_loop(char *filename);
 
 /* Below find the linked list functions for use with do_mem*/
 
@@ -138,5 +138,8 @@ int search_ops(char *token);
 
 int exec_builtin(char **tokens, int bcase);
 
+/* file functions */
+
+char *read_textfile(char *filename);
 
 #endif /*SHELL_H*/

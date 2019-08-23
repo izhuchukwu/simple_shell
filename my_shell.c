@@ -6,18 +6,21 @@
   * main - simple shell
   * Return: 0 if succesful
   */
-int main(void)
+int main(int argc, char **argv)
 {
+	char *filename = NULL;
 	/*
-	*if (argc > 2)
-	*	return (-1);
-	*/
-	/* check if argv[1] is a file */
+	* argc the right amount of arguments */
+	if (argc > 2)
+		return (-1);
 
+	/* check if argv[1] is a file */
+	if (argv && argv[1])
+		filename = argv[1];
 	/* signal handler */
 
 	/* read, tokenize, execute loop */
-	main_loop();
+	main_loop(filename);
 
 	/* clean up */
 

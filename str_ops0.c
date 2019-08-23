@@ -16,6 +16,12 @@ int _strcmp(char *s1, char *s2)
 	s11 = s1;
 	s22 = s2;
 
+	if (!s1 && !s2)
+		return (0);
+
+	if (!s1 || !s2)
+		return (-1);
+
 	while (*s11 == *s22)
 	{
 		if (*s11 == '\0')
