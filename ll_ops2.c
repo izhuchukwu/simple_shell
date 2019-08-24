@@ -57,6 +57,5 @@ void free_double_array(char **list)
 
 	for (i = 0; list[i]; i++)
 		do_mem(0, list[i]);
-	do_mem(0, list[i]);
 	do_mem(0, list);
 }

@@ -16,6 +16,7 @@ char **get_path()
 
 	temp = get_env_val("PATH");
 	ret = _strtok(temp, ":");
+	do_mem(0, temp);
 	return (ret);
 }
 
@@ -45,10 +46,12 @@ char *get_env_val(char *name)
 		{
 			res = do_mem((_strlen((env[i]) + j + 1) + 1), NULL);
 			_strcpy(res, ((env[i]) + j + 1));
+			free_double_array(env);
 			return (res);
 		}
 		i++;
 	}
+	free_double_array(env);
 	return (NULL);
 }
 
