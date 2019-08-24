@@ -47,7 +47,7 @@ void main_loop(char *filename)
 			/* check for exit command */
 			if ((_strcmp(buff, "exit\n")) == 0)
 				do_exit(2, "", 100);
-		
+
 			/* tokenize STDIN */
 			tokens = _strtok(buff, delim);
 

@@ -45,3 +45,18 @@ list_s *listify(char **arr)
 	}
 	return (ret);
 }
+
+
+/**
+ * free_double_array - free a double char pointer
+ * @list: the double char pointer
+ */
+void free_double_array(char **list)
+{
+	int i = 0;
+
+	for (i = 0; list[i]; i++)
+		do_mem(0, list[i]);
+	do_mem(0, list[i]);
+	do_mem(0, list);
+}

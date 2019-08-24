@@ -21,13 +21,11 @@ char *read_textfile(char *filename)
 	buff = do_mem(4096, NULL);
 	if (!buff)
 		return (NULL);
-	
 	/* open file */
 	of = open(filename, O_RDONLY);
 	if (of == -1)
 	{
-		/* should I use free here ?? */
-		free(buff);
+		do_mem(0, buff);
 		return (NULL);
 	}
 
@@ -35,8 +33,7 @@ char *read_textfile(char *filename)
 	lRead = read(of, buff, 4096);
 	if (lRead < 1)
 	{
-		/* should I use free here ?? */
-		free(buff);
+		do_mem(0, buff);
 		close(of);
 		return (NULL);
 	}

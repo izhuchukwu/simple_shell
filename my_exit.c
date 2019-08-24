@@ -32,6 +32,7 @@ void *do_mem(size_t size, void *ptr)
 			if (__get_node_at_index(all, i)->ptr == ptr)
 			{
 				__delete_node_at_index(&all, i);
+				break;
 			}
 		}
 		free(ptr);

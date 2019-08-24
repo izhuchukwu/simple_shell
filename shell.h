@@ -77,6 +77,8 @@ char **arrayify(list_s *);
 
 list_s *listify(char **);
 
+void free_double_array(char **);
+
 /* Above find the linked list functions */
 
 

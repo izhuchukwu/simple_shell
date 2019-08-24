@@ -43,11 +43,12 @@ char *get_env_val(char *name)
 		/* j only counts until null byte if name matches */
 		if (name[j] == '\0' && env[i][j] == '=')
 		{
-			return ((env[i]) + j + 1);
+			res = do_mem((_strlen((env[i]) + j + 1) + 1), NULL);
+			_strcpy(res, ((env[i]) + j + 1));
+			return (res);
 		}
 		i++;
 	}
-	_free(env);
 	return (NULL);
 }
 
