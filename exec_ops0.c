@@ -8,7 +8,7 @@
   * exec_builtin - execute function for builtins
   * @tokens: STDIN tokenized
   * @bcase: which builtin to execute
-  * Return: 1 if succesful 0 if it fails
+  * Return: 0 if succesful 1 if it fails
   */
 int exec_builtin(char **tokens, int bcase)
 {
@@ -20,12 +20,12 @@ int exec_builtin(char **tokens, int bcase)
 		if (tokens[1])
 			exit = atoi(tokens[1]);
 		do_exit(2, "", exit);
-		return (1);
+		return (0);
 	case 2:
 		cd_builtin(tokens);
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 /**
@@ -95,7 +95,7 @@ int exec_nb(char **tokens)
 			}
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	return (1);
+	return (status);
 }
 
 /**
@@ -155,7 +155,7 @@ int execute(char **tokens, int ops)
 		op = search_ops(tokens[i]);
 		if (op)
 			count++;
-		if (((op == 1) || (op == 2 && works) || (op == 3 && !works)) && count > ops)
+		if (((op == 1) || (op == 2 && !works) || (op == 3 && works)) && count > ops)
 		{
 			i++;
 			ops += 1;
