@@ -168,6 +168,5 @@ int execute(char **tokens, int ops)
 			execute(tokens + i, ops);
 		}
 	}
-	free_double_array(tokens);
 	return (0);
 }

@@ -28,6 +28,7 @@ void main_loop(char *filename)
 				execute(ftokens, 0);
 			}
 			do_mem(0, buff);
+			free_double_array(tokens);
 		}
 		else
 		{
@@ -54,6 +55,7 @@ void main_loop(char *filename)
 
 			execute(tokens, 0);
 			do_mem(0, buff);
+			free_double_array(tokens);
 		}
 	}
 }
