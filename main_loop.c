@@ -5,7 +5,7 @@
  */
 void main_loop(char *filename)
 {
-	char *buff = NULL, **tokens = NULL, **ftokens, *delim = " \n";
+	char *buff = NULL, **tokens = NULL, **ftokens = NULL, *delim = " \n";
 	static char *history;
 	ssize_t lgetline = 0, buffsize = 1024;
 	int i = 1, j;
@@ -27,6 +27,7 @@ void main_loop(char *filename)
 				/* execute commands */
 				execute(ftokens, 0);
 			}
+			do_mem(0, buff);
 		}
 		else
 		{
@@ -52,8 +53,7 @@ void main_loop(char *filename)
 			tokens = _strtok(buff, delim);
 
 			execute(tokens, 0);
+			do_mem(0, buff);
 		}
 	}
-	/* clean memory */
-	do_mem(0, buff);
 }

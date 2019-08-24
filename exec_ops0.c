@@ -43,7 +43,12 @@ char *get_full_command(char *path, char *command)
 	/* if command has any / in it, then return command */
 	tempsplit = _strtok(command, "/");
 	if (tempsplit && tempsplit[0] && tempsplit[1])
+	{
+		free_double_array(tempsplit);
 		return (command);
+	}
+	free_double_array(tempsplit);
+
 	/* else, concat the path with the command and a slash */
 	i = _strlen(path);
 	j = _strlen(command);
@@ -87,6 +92,7 @@ int exec_nb(char **tokens)
 	{
 		/* parent */
 		do {
+			free_double_array(envVars);
 			wid = waitpid(cpid, &status, WUNTRACED);
 			if (wid == -1)
 			{
@@ -162,5 +168,6 @@ int execute(char **tokens, int ops)
 			execute(tokens + i, ops);
 		}
 	}
+	free_double_array(tokens);
 	return (0);
 }

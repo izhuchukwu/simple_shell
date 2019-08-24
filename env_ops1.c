@@ -13,7 +13,10 @@ char **do_env(char *add, char *delete)
 	int len = 0, i = 0, j = 0;
 
 	if (!my_env)
+	{
 		my_env = listify((char**)add);
+		return (NULL);
+	}
 	if (add)
 		add_node_end(&my_env, add);
 	else if (delete)
