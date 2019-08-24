@@ -50,6 +50,6 @@ void cd_builtin(char **tokens)
 	{
 		/* change to home directory */
 		getcwd(lastdir, 100);
-		chdir(get_env_val(environ, "HOME"));
+		chdir(get_env_val("HOME"));
 	}
 }

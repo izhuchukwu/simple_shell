@@ -66,7 +66,7 @@ int exec_nb(char **tokens)
 	pid_t cpid, wid;
 	int status;
 
-	envVars = get_path(environ);
+	envVars = get_path();
 	comm = get_full_command(find_path(envVars, tokens[0]), tokens[0]);
 
 	/* fork and exec */
@@ -79,7 +79,7 @@ int exec_nb(char **tokens)
 	if (!cpid)
 	{
 		/* child */
-		execve(comm, tokens, (char * const *)get_envir());
+		execve(comm, tokens, (char * const *)get_env());
 		perror("");
 		do_exit(2, "Couldn't exec", 1);
 	}

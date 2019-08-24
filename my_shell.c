@@ -6,7 +6,7 @@
   * main - simple shell
   * Return: 0 if succesful
   */
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
 	char *filename = NULL;
 	/*
@@ -18,6 +18,9 @@ int main(int argc, char **argv)
 	if (argv && argv[1])
 		filename = argv[1];
 	/* signal handler */
+
+	/* initialize the environment */
+	do_env((char*)envp, NULL);
 
 	/* read, tokenize, execute loop */
 	main_loop(filename);

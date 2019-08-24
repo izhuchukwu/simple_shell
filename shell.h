@@ -4,8 +4,6 @@
 #include <stddef.h>
 #include <unistd.h>
 
-extern char **environ;
-
 /**
  * struct list_p - singly linked list
  * @ptr: a malloced address
@@ -109,13 +107,13 @@ ssize_t _getline(char **lineptr, size_t n, int stream);
 
 char **_strtok(char *str, char *delim);
 
-char **get_path(char **env);
+char **get_path();
 
-char *get_env_val(char **env, char *name);
+char *get_env_val(char *name);
 
 char *find_path(char **path, char *command);
 
-char **get_envir();
+char **get_env();
 
 /* environment functions */
 

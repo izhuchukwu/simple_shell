@@ -3,28 +3,34 @@
 #include <unistd.h>
 #include <dirent.h>
 
-char *get_env_val(char **, char*);
+char *get_env_val(char*);
 
 /**
  * get_path - get the path in a double char pointer
- * @env: the environment to get it from
  * Return: the double char pointer of the path
  */
-char **get_path(char **env)
+char **get_path()
 {
-	return (_strtok(get_env_val(env, "PATH"), ":"));
+	char *temp = NULL;
+	char **ret = NULL;
+
+	temp = get_env_val("PATH");
+	ret = _strtok(temp, ":");
+	return (ret);
 }
 
 /**
  * get_env_val - get the value of an env variable
- * @env: the environment to get the variable out of
  * @name: the name of the variable to get the value of
  * Return: the string pointer to where the value part of the variable starts
  */
-char *get_env_val(char **env, char *name)
+char *get_env_val(char *name)
 {
 	int i = 0, j = 0;
+	char **env = NULL;
+	char *res = NULL;
 
+	env = get_env();
 	while (env[i])
 	{
 		j = 0;
@@ -36,9 +42,12 @@ char *get_env_val(char **env, char *name)
 		}
 		/* j only counts until null byte if name matches */
 		if (name[j] == '\0' && env[i][j] == '=')
+		{
 			return ((env[i]) + j + 1);
+		}
 		i++;
 	}
+	_free(env);
 	return (NULL);
 }
 
@@ -84,7 +93,7 @@ char *find_path(char **path, char *command)
  * get_envir - get current environment as a malloc'd, NULL-terminating char**
  * Return: the environment as a char**
  */
-char **get_envir(void)
+char **get_env(void)
 {
 	return (do_env(NULL, NULL));
 }
