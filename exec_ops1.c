@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <stdio.h>
 
 /**
  * exec_single - execute a single command
@@ -101,7 +102,12 @@ int execute(char **tokens)
 	{
 		if (!head || !(head[0]))
 			return (works);
-		exec_single(head);
+		works = exec_single(head);
+
+		if (op == 3 && !works)
+			return (works);
+		if (op == 2 && works)
+			return (works);
 
 		op = search_ops(tail);
 		head = get_current_command(tail);

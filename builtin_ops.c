@@ -21,8 +21,9 @@ char **get_builtins()
 /**
  * cd_builtin - executes cd function, changes directory
  * @tokens: command input into prompt tokenized
+ * Return: the exit status
  */
-void cd_builtin(char **tokens)
+int cd_builtin(char **tokens)
 {
 	char *HOME = NULL, *templd;
 	static char *lastdir;
@@ -52,4 +53,5 @@ void cd_builtin(char **tokens)
 		getcwd(lastdir, 100);
 		chdir(get_env_val("HOME"));
 	}
+	return (0);
 }

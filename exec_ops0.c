@@ -20,12 +20,11 @@ int exec_builtin(char **tokens, int bcase)
 		if (tokens[1])
 			exit = atoi(tokens[1]);
 		do_exit(2, "", exit);
-		return (0);
+		return (exit);
 	case 2:
-		cd_builtin(tokens);
-		return (0);
+		return (cd_builtin(tokens));
 	}
-	return (1);
+	return (0);
 }
 
 /**
