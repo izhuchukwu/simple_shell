@@ -2,7 +2,8 @@
 
 ## Description
 
-Simple shell project for Holberton
+Project 0x16 - Simple Shell
+Write a simple UNIX command interpreter.
 
 ## List of Allowed Functions and System Calls
 
@@ -17,14 +18,25 @@ Simple shell project for Holberton
 [fork](http://man7.org/linux/man-pages/man2/fork.2.html) (man 2 fork)
 [free](https://linux.die.net/man/3/free) (man 3 free)
 [getcwd](http://man7.org/linux/man-pages/man3/getcwd.3.html) (man 3 getcwd)
-[getline](https://linux.die.net/man/3/getline) (man 3 getline) - Advanced - Don't use it
+[getline](https://linux.die.net/man/3/getline) (man 3 getline) - Bonus if not used
 [isatty](http://man7.org/linux/man-pages/man3/isatty.3.html) (man 3 isatty)
-[kill](http://man7.org/linux/man-pages/man2/kill.2.html)(man 2 kill)
+[kill](http://man7.org/linux/man-pages/man2/kill.2.html) (man 2 kill)
 [malloc](http://man7.org/linux/man-pages/man3/malloc.3.html)(man 3 malloc)
 [open](http://man7.org/linux/man-pages/man2/open.2.html) (man 2 open)
 [opendir](http://man7.org/linux/man-pages/man3/opendir.3.html) (man 3 opendir)
 [perror](http://man7.org/linux/man-pages/man3/perror.3.html) (man 3 perror)
-[read](http://man7.org/linux/man-pages/man2/read.2.html)(man 2 read)
+[read](http://man7.org/linux/man-pages/man2/read.2.html) (man 2 read)
+[readdir](http://man7.org/linux/man-pages/man3/readdir.3.html) (man 3 readdir)
+[signal](http://man7.org/linux/man-pages/man2/signal.2.html) (man 2 signal)
+[stat](https://linux.die.net/man/2/stat) (__xstat)(man 2 stat)
+[lstat](https://linux.die.net/man/2/lstat) (__lxstat)(man 2 lstat)
+[fstat](https://linux.die.net/man/2/fstat) (__fxstat)(man 2 fstat)
+[strtok](http://man7.org/linux/man-pages/man3/strtok.3.html) (man 3 strtok) - Bonus if not used
+[wait](https://linux.die.net/man/2/wait) (man 2 wait)
+[waitpid](https://linux.die.net/man/2/waitpid) (man 2 waitpid)
+[wait3](https://linux.die.net/man/2/wait3) (man 2 wait3)
+[wait4](http://man7.org/linux/man-pages/man2/wait4.2.html) (man 2 wait4)
+[write](http://man7.org/linux/man-pages/man2/write.2.html) (man 2 write)
 
 ## Installing
 
