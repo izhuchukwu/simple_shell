@@ -8,15 +8,33 @@ char **get_builtins()
 {
 	char **builtins;
 
-	builtins = do_mem(sizeof(char *) * 3, NULL);
+	builtins = do_mem(sizeof(char *) * 4, NULL);
 
 	builtins[0] = "exit";
 	builtins[1] = "cd";
-	builtins[2] = NULL;
+	builtins[2] = "env";
+	builtins[3] = NULL;
 
 	return (builtins);
 }
 
+int env_builtin(char **tokens)
+{
+	char **env;
+	int i = 0, len = 0;
+
+	env = get_env();
+	while (env[i])
+	{
+		len = _strlen(env[i]);
+		write(STDOUT_FILENO, env[i], len);
+		write(STDOUT_FILENO, "\n", 1);
+		i = i + 1;
+	}
+	free_double_array(env);
+
+	return (0);
+}
 
 /**
  * cd_builtin - executes cd function, changes directory

@@ -23,6 +23,8 @@ int exec_builtin(char **tokens, int bcase)
 		return (exit);
 	case 2:
 		return (cd_builtin(tokens));
+	case 3:
+		return (env_builtin(tokens));
 	}
 	return (0);
 }
