@@ -33,6 +33,7 @@ void main_loop(char *filename)
 				ftokens = _strtok(tokens[j], " ");
 				/* execute commands */
 				execute(ftokens);
+				free_double_array(ftokens);
 			}
 			do_mem(0, buff);
 			free_double_array(tokens);

@@ -90,18 +90,21 @@ char **get_current_command(char **tokens)
   */
 int execute(char **tokens)
 {
-	int cont = 1, works = 0, op = 0;
+	int works = 0, op = 0;
 	char **head = NULL;
 	char **tail = NULL;
+	char **oldtail = NULL;
+	char **oldhead = NULL;
 
 	op = search_ops(tokens);
 	head = get_current_command(tokens);
 	tail = get_next_commands(tokens);
 
-        while(cont)
+        while(1)
 	{
 		if (!head || !(head[0]))
 			return (works);
+
 		works = exec_single(head);
 
 		if (op == 3 && !works)
@@ -110,8 +113,16 @@ int execute(char **tokens)
 			return (works);
 
 		op = search_ops(tail);
+		oldhead = head;
 		head = get_current_command(tail);
+		oldtail = tail;
 		tail = get_next_commands(tail);
+
+		if (oldhead)
+			free_double_array(oldhead);
+		if (oldtail)
+			free_double_array(oldtail);
+
 	}
-	return (works);
+	return (1);
 }

@@ -69,11 +69,13 @@ int exec_nb(char **tokens)
 {
 	char **envVars = NULL;
 	char *comm = NULL;
+	char *path = NULL;
 	pid_t cpid, wid;
 	int status;
 
 	envVars = get_path();
-	comm = get_full_command(find_path(envVars, tokens[0]), tokens[0]);
+	path = find_path(envVars, tokens[0]);
+	comm = get_full_command(path, tokens[0]);
 
 	/* fork and exec */
 	cpid = fork();
@@ -98,9 +100,10 @@ int exec_nb(char **tokens)
 			if (wid == -1)
 			{
 				perror("waitpid");
-				exit(EXIT_FAILURE);/* return 0? */
+				do_exit(STDERR_FILENO, "", EXIT_FAILURE);/* return 0? */
 			}
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		do_mem(0, comm);
 	}
 	return (status);
 }
