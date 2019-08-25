@@ -1,6 +1,7 @@
 #include "shell.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 
 /**
   * main - simple shell
@@ -18,7 +19,7 @@ int main(int argc, char **argv, char **envp)
 	if (argv && argv[1])
 		filename = argv[1];
 	/* signal handler */
-
+	signal(SIGINT, signal_handler);
 	/* initialize the environment */
 	do_env((char*)envp, NULL);
 

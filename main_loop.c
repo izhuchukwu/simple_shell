@@ -1,5 +1,12 @@
 #include "shell.h"
 #include <stdio.h>
+#include <signal.h>
+
+void signal_handler(int sig)
+{
+	write(STDOUT_FILENO, "\n$ ", 3);
+}
+
 /**
  * main_loop - reads STDIN, tokenizes it and executes command
  */

@@ -18,6 +18,8 @@ typedef struct list_p
 	struct list_p *next;
 } list_t;
 
+void signal_handler(int sig);
+
 void main_loop(char *filename);
 
 /* Below find the linked list functions for use with do_mem*/
