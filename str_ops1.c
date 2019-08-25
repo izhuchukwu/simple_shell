@@ -48,17 +48,19 @@ int _atoi(char *s)
   *
   *
   */
-int sizeof_command(char **tokens, int place)
+int sizeof_command(char **tokens)
 {
-	int count, i;
+	int i = 0;
 
-	for (i = 0, count = 0; tokens && tokens[i]; i++)
+	if (!tokens)
+		return (0);
+	for (i = 0; tokens[i]; i++)
 	{
-		if (search_ops(tokens[i]))
-		{
-			count++;
-		}
-		if (count > place)
+		if (tokens[i][0] == '&' && tokens[i][1] == '&')
+			break;
+		if (tokens[i][0] == '|' && tokens[i][1] == '|')
+			break;
+		if (tokens[i][0] == ';')
 			break;
 	}
 	return (i);

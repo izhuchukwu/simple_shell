@@ -109,64 +109,21 @@ int exec_nb(char **tokens)
   * @token: token from std input
   * Return: 0 if none, 1 if ';', 2 if '&&' 3 if '||'
   */
-int search_ops(char *token)
+int search_ops(char **tokens)
 {
-	/* check for ;, &&, || */
-	if (token[0] == ';')
-		return (1);
-	if (!token[0] || !token[1])
+	int i = 0;
+
+	if (!tokens)
 		return (0);
-	if (token[0] == '&' && token[1] == '&')
-		return (2);
-	if (token[0] == '|' && token[1] == '|')
-		return (3);
-	return (0);
-}
-
-/**
-  * execute - main execute function
-  * @tokens: STDIN tokenized
-  * @ops: number of operation we are in
-  * Return: int if succesful
-  */
-int execute(char **tokens, int ops)
-{
-	int checkBuiltIn = 0, i, count, works = 0, op = 0, commandSize = 0;
-	char **builtins, **extokens;
-
-	/* split tokens into separate commands if ;,&&,|| exist */
-	commandSize = sizeof_command(tokens, ops);
-	extokens = do_mem(sizeof(char *) * (commandSize + 1), NULL);
-	for (i = 0; i < commandSize; i++)
+	for (i = 0; tokens[i]; i++)
 	{
-		extokens[i] = do_mem(_strlen(tokens[i]) + 1, NULL);
-
-		_strcpy(extokens[i], tokens[i]);
-	}
-	extokens[i] = NULL;
-	builtins = get_builtins();
-
-	/* check if its a builtin */
-	for (i = 0; builtins[i]; i++)
-		if (_strcmp(builtins[i], tokens[0]) == 0)
-			checkBuiltIn = i + 1;
-
-	if (checkBuiltIn && tokens)
-		works = exec_builtin(extokens, checkBuiltIn);
-	else if (tokens)
-		works = exec_nb(extokens);
-	/* check for ;, &&, || */
-	for (i = 0, count = 0; tokens && tokens[i]; i++)
-	{
-		op = search_ops(tokens[i]);
-		if (op)
-			count++;
-		if (((op == 1) || (op == 2 && !works) || (op == 3 && works)) && count > ops)
-		{
-			i++;
-			ops += 1;
-			execute(tokens + i, ops);
-		}
+		/* check for ;, &&, || */
+		if (tokens[i][0] == ';')
+			return (1);
+		if (tokens[i][0] == '&' && tokens[i][1] && tokens[i][1] == '&')
+			return (2);
+		if (tokens[i][0] == '|' && tokens[i][1] && tokens[i][1] == '|')
+			return (3);
 	}
 	return (0);
 }

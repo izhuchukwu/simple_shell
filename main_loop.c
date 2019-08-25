@@ -25,7 +25,7 @@ void main_loop(char *filename)
 				/* tokenize individual commands */
 				ftokens = _strtok(tokens[j], " ");
 				/* execute commands */
-				execute(ftokens, 0);
+				execute(ftokens);
 			}
 			do_mem(0, buff);
 			free_double_array(tokens);
@@ -53,7 +53,7 @@ void main_loop(char *filename)
 			/* tokenize STDIN */
 			tokens = _strtok(buff, delim);
 
-			execute(tokens, 0);
+			execute(tokens);
 			do_mem(0, buff);
 			free_double_array(tokens);
 		}

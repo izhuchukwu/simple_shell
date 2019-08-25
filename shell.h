@@ -96,7 +96,7 @@ char *_strcpy(char *dest, char *src);
 
 int _atoi(char *s);
 
-int sizeof_command(char **tokens, int place);
+int sizeof_command(char **tokens);
 
 /* Above find the string functions */
 
@@ -130,11 +130,11 @@ char **get_builtins();
 
 /* execute functions */
 
-int execute(char **tokens, int ops);
+int execute(char **tokens);
 
 int exec_nb(char **tokens);
 
-int search_ops(char *token);
+int search_ops(char **tokens);
 
 int exec_builtin(char **tokens, int bcase);
 
