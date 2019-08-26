@@ -130,6 +130,8 @@ int cd_builtin(char **tokens);
 
 char **get_builtins();
 
+int env_builtin(char **tokens);
+
 /* execute functions */
 
 int execute(char **tokens);
