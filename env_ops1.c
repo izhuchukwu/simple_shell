@@ -14,7 +14,7 @@ char **do_env(char *add, char *delete)
 
 	if (!my_env)
 	{
-		my_env = listify((char**)add);
+		my_env = listify((char **)add);
 		return (NULL);
 	}
 	if (add)

@@ -2,43 +2,60 @@
 #include <stdio.h>
 #include <signal.h>
 
+/**
+ * signal_handler - writes new line plus prompt
+ * @sig: signal
+ */
 void signal_handler(int sig)
 {
 	write(STDOUT_FILENO, "\n$ ", 3);
 }
+/**
+ * handle_file - parses through list of commands in a file and executes
+ * @filename: name of file with commands to parse through and execute
+ */
+void handle_file(char *filename)
+{
+	char *buff = NULL;
+	char **tokens = NULL;
+	char **ftokens = NULL;
+	int i;
+
+	/* read file and write commands to a buff */
+	buff = do_mem(4096, NULL);
+	buff = read_textfile(filename);
+
+	/* separate commands in file */
+	tokens = _strtok(buff, "\n");
+	for (i = 0; tokens[i]; i++)
+	{
+		/* tokenize individual commands */
+		ftokens = _strtok(tokens[i], " ");
+		/* execute commands */
+		execute(ftokens);
+		free_double_array(ftokens);
+	}
+	do_mem(0, buff);
+	free_double_array(tokens);
+}
 
 /**
  * main_loop - reads STDIN, tokenizes it and executes command
+ *  @filename: if argv[1] exist takes in filename
  */
 void main_loop(char *filename)
 {
-	char *buff = NULL, **tokens = NULL, **ftokens = NULL, *delim = " \n";
+	char *buff = NULL, **tokens = NULL, *delim = " \n";
 	static char *history;
 	ssize_t lgetline = 0, buffsize = 1024;
-	int i = 1, j;
 
-	while (i)
+	if (filename)
 	{
-		if (filename)
-		{
-			/* read file and write commands to a buff */
-			buff = do_mem(4096, NULL);
-			buff = read_textfile(filename);
-			i = 0;
-			/* separate commands in file */
-			tokens = _strtok(buff, "\n");
-			for (j = 0; tokens[j]; j++)
-			{
-				/* tokenize individual commands */
-				ftokens = _strtok(tokens[j], " ");
-				/* execute commands */
-				execute(ftokens);
-				free_double_array(ftokens);
-			}
-			do_mem(0, buff);
-			free_double_array(tokens);
-		}
-		else
+		handle_file(filename);
+	}
+	else
+	{
+		while (1)
 		{
 			/* only print a prompt if isatty is true */
 			if (isatty(STDIN_FILENO))

@@ -2,7 +2,7 @@
 
 /**
   * get_builtins - list of builtin commands
-  * Return - double pointer holding list of commands
+  * Return: double pointer holding list of commands
   */
 char **get_builtins()
 {
@@ -17,7 +17,11 @@ char **get_builtins()
 
 	return (builtins);
 }
-
+/**
+ * env_builtin - Lists environment
+ * @tokens: standard input tokenized
+ *  Return: 0 if successfull
+ */
 int env_builtin(char **tokens)
 {
 	char **env;

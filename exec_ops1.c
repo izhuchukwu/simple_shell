@@ -33,7 +33,7 @@ int exec_single(char **tokens)
  */
 char **get_next_commands(char **tokens)
 {
-	char** extokens = NULL;
+	char **extokens = NULL;
 	int commandSize = 0, retSize = 0, i = 0;
 
 	if (!tokens || !(tokens[0]))
@@ -61,7 +61,7 @@ char **get_next_commands(char **tokens)
  */
 char **get_current_command(char **tokens)
 {
-	char** extokens = NULL;
+	char **extokens = NULL;
 	int commandSize = 0, i = 0;
 
 	if (!tokens || !(tokens[0]))
@@ -85,7 +85,6 @@ char **get_current_command(char **tokens)
 /**
   * execute - main execute function
   * @tokens: STDIN tokenized
-  * @ops: number of operation we are in
   * Return: int if succesful
   */
 int execute(char **tokens)
@@ -100,7 +99,7 @@ int execute(char **tokens)
 	head = get_current_command(tokens);
 	tail = get_next_commands(tokens);
 
-        while(1)
+	while (1)
 	{
 		if (!head || !(head[0]))
 			return (works);

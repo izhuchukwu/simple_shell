@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <dirent.h>
 
-char *get_env_val(char*);
+char *get_env_val(char *);
 
 /**
  * get_path - get the path in a double char pointer
@@ -94,7 +94,7 @@ char *find_path(char **path, char *command)
 }
 
 /**
- * get_envir - get current environment as a malloc'd, NULL-terminating char**
+ * get_env - get current environment as a malloc'd, NULL-terminating char**
  * Return: the environment as a char**
  */
 char **get_env(void)

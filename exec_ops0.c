@@ -110,7 +110,7 @@ int exec_nb(char **tokens)
 
 /**
   * search_ops - search for ;, &&, || operators
-  * @token: token from std input
+  * @tokens: tokens from std input
   * Return: 0 if none, 1 if ';', 2 if '&&' 3 if '||'
   */
 int search_ops(char **tokens)

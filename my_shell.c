@@ -5,13 +5,16 @@
 
 /**
   * main - simple shell
-  * Return: 0 if succesful
+  * @argc: Number of arguments
+  * @argv: list of arguments
+  * @envp: environment
+  * Return: 0 if successful
   */
 int main(int argc, char **argv, char **envp)
 {
 	char *filename = NULL;
-	/*
-	* argc the right amount of arguments */
+
+	/* argc the right amount of arguments */
 	if (argc > 2)
 		return (-1);
 
@@ -21,7 +24,7 @@ int main(int argc, char **argv, char **envp)
 	/* signal handler */
 	signal(SIGINT, signal_handler);
 	/* initialize the environment */
-	do_env((char*)envp, NULL);
+	do_env((char *)envp, NULL);
 
 	/* read, tokenize, execute loop */
 	main_loop(filename);

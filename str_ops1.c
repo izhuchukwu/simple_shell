@@ -44,9 +44,9 @@ int _atoi(char *s)
 }
 
 /**
-  *
-  *
-  *
+  * sizeof_command - returns the size of command, breaks if it hits &&, ||, ;
+  * @tokens: standard input tokenized
+  * Return: the size of the command
   */
 int sizeof_command(char **tokens)
 {

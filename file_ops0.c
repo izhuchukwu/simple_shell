@@ -3,10 +3,9 @@
 #include <stdlib.h>
 
 /**
-  * read_textfile - 
-  *
-  *
-  *
+  * read_textfile - reads a file and returns string of what it read
+  * @filename: name of file to read
+  * Return: string of what it read
   */
 
 char *read_textfile(char *filename)
