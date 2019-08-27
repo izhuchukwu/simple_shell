@@ -18,7 +18,7 @@ void *do_mem(size_t size, void *ptr)
 	{
 		ret = malloc(size);
 		if (!ret)
-			return (NULL);
+			do_exit(2, "malloc failed", EXIT_FAILURE);
 		for (i = 0; (unsigned int)i < size; i++)
 			((char *)ret)[i] = 0;
 		__add_node_end(&all, ret);
@@ -55,16 +55,11 @@ void *do_mem(size_t size, void *ptr)
  */
 void do_exit(int fd, char *msg, int code)
 {
-	int msglen = 0;
-
 	if (*msg)
 	{
 		/* print message */
-		while (msg[msglen])
-			msglen++;
-		write(fd, msg, msglen);
+		write(fd, msg, _strlen(msg));
 	}
-
 	/* nuke extra memory */
 	do_mem(0, NULL);
 

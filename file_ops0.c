@@ -18,14 +18,12 @@ char *read_textfile(char *filename)
 		return (NULL);
 	/* allocate memory for content of file */
 	buff = do_mem(4096, NULL);
-	if (!buff)
-		return (NULL);
 	/* open file */
 	of = open(filename, O_RDONLY);
 	if (of == -1)
 	{
 		do_mem(0, buff);
-		return (NULL);
+		do_exit(2, _strcat("Can't open ", filename), 127);
 	}
 
 	/* read file up to the size of the buffer 4096 */

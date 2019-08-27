@@ -78,17 +78,19 @@ char *find_path(char **path, char *command)
 		{
 			write(STDOUT_FILENO, "Could not open directory\n", 25);
 			closedir(dr);
-			return (NULL);
 		}
-		while ((de = readdir(dr)) != NULL)
+		else
 		{
-			if (_strcmp((*de).d_name, command) == 0)
+			while ((de = readdir(dr)) != NULL)
 			{
-				closedir(dr);
-				return (path[i]);
+				if (_strcmp((*de).d_name, command) == 0)
+				{
+					closedir(dr);
+					return (path[i]);
+				}
 			}
+			closedir(dr);
 		}
-		closedir(dr);
 	}
 	return (NULL);
 }

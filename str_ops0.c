@@ -92,9 +92,11 @@ char *_strcat(char *dest, char *src)
 {
 	char *write;
 	char *s2;
-	/* [POSSIBLE BUG] if dest doesnt exist but src does should it return src? */
-	if (!dest || !src)
+
+	if (!src)
 		return (dest);
+	if (!dest)
+		return (src);
 	write = dest;
 	s2 = src;
 	for (; *write != '\0'; write++)
@@ -103,7 +105,7 @@ char *_strcat(char *dest, char *src)
 	for (; *s2 != '\0'; s2++)
 	{
 		*write = *s2;
-		write = write + 1;
+		write++;
 	}
 	*write = '\0';
 	return (dest);
