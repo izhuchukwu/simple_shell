@@ -44,6 +44,8 @@ char *get_env_val(char *name)
 		/* j only counts until null byte if name matches */
 		if (name[j] == '\0' && env[i][j] == '=')
 		{
+			if (!env[i][j + 1])
+				return (NULL);
 			res = do_mem((_strlen((env[i]) + j + 1) + 1), NULL);
 			_strcpy(res, ((env[i]) + j + 1));
 			free_double_array(env);
@@ -68,7 +70,7 @@ char *find_path(char **path, char *command)
 	DIR *dr = NULL;
 	int i = 0;
 
-	if (!command)
+	if (!command || !path)
 		return (NULL);
 	for (i = 0; path[i]; i++)
 	{

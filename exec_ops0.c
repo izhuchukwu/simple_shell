@@ -84,10 +84,9 @@ int exec_nb(char **tokens)
 	path = find_path(envVars, tokens[0]);
 	if (!path)
 	{
-		perror("command not found\n");
+		/* if no path */
 	}
 	comm = get_full_command(path, tokens[0]);
-
 	/* fork and exec */
 	cpid = fork();
 	if (cpid == -1)
