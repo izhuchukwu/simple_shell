@@ -47,7 +47,7 @@ void main_loop(char *filename)
 {
 	char *buff = NULL, **tokens = NULL, *delim = " \n";
 	static char *history;
-	ssize_t lgetline = 0, buffsize = 1024;
+	ssize_t lgetline = 0, buffsize = 4096;
 
 	if (filename)
 	{
@@ -63,7 +63,7 @@ void main_loop(char *filename)
 			buff = do_mem(buffsize, NULL);
 
 			/* read command, getline and check if it fails */
-			while ((lgetline = _getline(&buff, buffsize, STDIN_FILENO)) < 0)
+			while ((lgetline = _getline(buff, STDIN_FILENO)) < 0)
 			{
 				do_mem(0, buff);
 				do_exit(2, "", -1);

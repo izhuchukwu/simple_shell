@@ -109,7 +109,7 @@ void *do_mem(size_t size, void *ptr);
 
 void do_exit(int fd, char *msg, int code);
 
-ssize_t _getline(char **lineptr, size_t n, int stream);
+ssize_t _getline(char *lineptr, int stream);
 
 char **_strtok(char *str, char *delim);
 
