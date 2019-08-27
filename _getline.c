@@ -32,16 +32,19 @@ char *_getline2()
  */
 ssize_t _getline(char *lineptr, int stream)
 {
-        static int input[4096];
+        static char input[4096];
 	static int filled;
-	int newline_index = -1, i = 0, tmp = 2;
+	int newline_index = -1, i = 0, red = 0;
+	char tmp = 2;
 	ssize_t ret = 0;
 
 	/* if the buffer is empty, fill it */
 	if (!filled)
 	{
-		read(stream, input, 4096);
-		filled = 4096;
+		red = read(stream, input, 4096);
+		filled = red;
+		if (!red)
+			return (0);
 	}
 
 
@@ -68,15 +71,21 @@ ssize_t _getline(char *lineptr, int stream)
 		if (filled == 4096)
 		{
 			/* should always fill buffer with \n or EOF at end*/
-			while(tmp != -1 && tmp != '\n')
-				tmp = read(stream, &tmp, 1);
+			red = 1;
+			while(red && tmp != '\n')
+			{
+				tmp = -1;
+				red = read(stream, &tmp, 1);
+			}
 			input[4095] = tmp;
 			return (_getline(lineptr, stream));
 		}
 		/* if the buffer isn't full, then fill it and try again. */
 		else
 		{
-			read(stream, input + filled, 4096 - filled);
+			red = read(stream, input + filled, 4096 - filled);
+			if (red < 4096 - filled)
+				input[input + filled + red] = -1;
 			return (_getline(lineptr, stream));
 		}
 

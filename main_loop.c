@@ -71,6 +71,9 @@ void main_loop(char *filename)
 			/* exit if ctrl- d */
 			if (lgetline == 0)
 				do_exit(2, "", 100);
+			/* check for ctrl-d at the end of command */
+			if (buff[lgetline] == -1)
+				continue;
 			/* check for exit command */
 			if ((_strcmp(buff, "exit\n")) == 0)
 				do_exit(2, "", 100);
