@@ -14,7 +14,7 @@ void __free_list_full(list_t *head)
 	{
 		hold = head;
 		head = head->next;
-		printf("EXITMEMORY: %s\n", (char *)(hold->ptr));
+		/* printf("EXITMEMORY: %s\n", (char *)(hold->ptr)); */
 		free(hold->ptr);
 		free(hold);
 	}
