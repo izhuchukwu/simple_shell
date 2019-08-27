@@ -102,6 +102,10 @@ int sizeof_command(char **tokens);
 
 int _isdigit(int c);
 
+int has_newline(char *input);
+
+void shiftbuffer(char *input, int newline_index, int filled);
+
 /* Above find the string functions */
 
 

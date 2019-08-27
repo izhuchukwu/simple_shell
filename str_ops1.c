@@ -79,3 +79,53 @@ int _isdigit(int c)
 
 	return (0);
 }
+
+/**
+ * has_newline - checks for \n or EOF and returns the index
+ * @input: input read from read function in getline
+ * Return: the size of command when it reaches \n or EOF
+ */
+int has_newline(char *input)
+{
+	int i;
+
+	for (i = 0; input && input[i]; i++)
+	{
+		/*searches for \n, new line */
+		if (input[i] == '\n')
+			return (i);
+		
+		/* check if EOF */
+		/*
+		*if (input[1] == '-1')
+		*	return (i);
+		*/
+	}
+
+	return (i);
+}
+
+/**
+ * shiftbuffer - shifts the buffer to the next command after \n
+ *  @input: input from standard input
+ *  @newline_index: where there is a new line or EOF
+ *  @filled: size filled to
+ */
+void shiftbuffer(char *input, int newline_index, int filled)
+{
+	/* might have to make input a double pointer */
+	/* shift and place back to beggining */
+	int i = newline_index;
+	int j = 0;
+	
+	for (; i < filled; i++, j++)
+	{
+		/* copy */
+		input[j] = input[i];
+	}
+	/* fills remainder with '\0' */
+	for (;j < 4096; j++)
+	{
+		input[j] = '\0';
+	}
+}
