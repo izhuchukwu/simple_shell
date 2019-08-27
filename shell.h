@@ -100,6 +100,8 @@ int _atoi(char *s);
 
 int sizeof_command(char **tokens);
 
+int _isdigit(int c);
+
 /* Above find the string functions */
 
 

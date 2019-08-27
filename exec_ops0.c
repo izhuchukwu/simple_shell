@@ -13,14 +13,21 @@
 int exec_builtin(char **tokens, int bcase)
 {
 	int exit = 0;
+	int i = 0;
 
 	switch (bcase)
 	{
 	case 1:
 		if (tokens[1])
-			exit = atoi(tokens[1]);
+		{
+			for (; tokens[1][i]; i++)
+				if (!_isdigit(tokens[1][i]))
+					{
+						do_exit(2, "numeric arguments only", exit);
+					}
+		exit = atoi(tokens[1]);
+		}
 		do_exit(2, "", exit);
-		return (exit);
 	case 2:
 		return (cd_builtin(tokens));
 	case 3:
@@ -75,21 +82,25 @@ int exec_nb(char **tokens)
 
 	envVars = get_path();
 	path = find_path(envVars, tokens[0]);
+	if (!path)
+	{
+		perror("command not found\n");
+	}
 	comm = get_full_command(path, tokens[0]);
 
 	/* fork and exec */
 	cpid = fork();
 	if (cpid == -1)
 	{
-		perror("fork");
-		exit(EXIT_FAILURE); /* return 0? */
+		/* Fork failed - exits with error message and exit code */
+		do_exit(2, "Fork failed", EXIT_FAILURE);
 	}
 	if (!cpid)
 	{
 		/* child */
 		execve(comm, tokens, (char * const *)get_env());
 		perror("");
-		do_exit(2, "Couldn't exec", 1);
+		do_exit(2, "Couldn't exec", EXIT_FAILURE);
 	}
 	else
 	{
@@ -100,7 +111,7 @@ int exec_nb(char **tokens)
 			if (wid == -1)
 			{
 				perror("waitpid");
-				do_exit(STDERR_FILENO, "", EXIT_FAILURE);/* return 0? */
+				do_exit(STDERR_FILENO, "", EXIT_FAILURE);
 			}
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 		do_mem(0, comm);

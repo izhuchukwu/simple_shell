@@ -17,7 +17,10 @@ int exec_single(char **tokens)
 	/* check if its a builtin */
 	for (i = 0; builtins[i]; i++)
 		if (_strcmp(builtins[i], tokens[0]) == 0)
+		{
 			checkBuiltIn = i + 1;
+			break;
+		}
 
 	if (checkBuiltIn && tokens)
 		works = exec_builtin(tokens, checkBuiltIn);
