@@ -32,7 +32,7 @@ char *_getline2()
  */
 ssize_t _getline(char *lineptr, int stream)
 {
-    static char input[4096];
+	static char input[4096];
 	static int filled;
 	int newline_index = -1, i = 0, red = 0;
 	char tmp = 2;
@@ -60,7 +60,9 @@ ssize_t _getline(char *lineptr, int stream)
 		{
 			lineptr[i] = input[i];
 		}
-		ret = newline_index + 1;
+		ret = newline_index;
+		if (input[ret] == '\n')
+			ret = ret + 1;
 
 		/* Shift any remaining chars to the left */
 		shiftbuffer(input, newline_index, filled);
@@ -78,18 +80,20 @@ ssize_t _getline(char *lineptr, int stream)
 			red = 1;
 			while(red && tmp != '\n')
 			{
-				tmp = -1;
+				tmp = 0;
 				red = read(stream, &tmp, 1);
 			}
-			input[4095] = tmp;
+			input[4095] = '\n';
 			return (_getline(lineptr, stream));
 		}
 		/* if the buffer isn't full, then fill it and try again. */
 		else
 		{
 			red = read(stream, input + filled, 4096 - filled);
+			/* ctrl D was pressed if red is less */
 			if (red < (4096 - filled))
-				input[filled + red] = -1;
+				input[filled + red] = '\n';
+			filled = filled + red + 1;
 			return (_getline(lineptr, stream));
 		}
 
