@@ -35,6 +35,10 @@ int exec_builtin(char **tokens, int bcase)
 		return (cd_builtin(tokens));
 	case 3:
 		return (env_builtin());
+	case 4:
+		return (setenv_builtin(tokens));
+	case 5:
+		return (unsetenv_builtin(tokens));
 	}
 	return (0);
 }

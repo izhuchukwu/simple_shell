@@ -24,9 +24,14 @@ char **do_env(char *add, char *delete)
 		len = list_len(my_env);
 		for (i = 0; i < len; i++)
 		{
+			j = 0;
 			tmp = get_node_at_index(my_env, i)->ptr;
 			while (delete && tmp && delete[j] && tmp[j] != '=')
+			{
+				if (delete[j] != tmp[j])
+					break;
 				j++;
+			}
 			if (!(delete[j]) && tmp[j] == '=')
 			{
 				delete_node_at_index(&my_env, i);

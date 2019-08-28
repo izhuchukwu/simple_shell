@@ -22,7 +22,7 @@ int linum(int add);
 
 char *get_prog_name(char *name);
 
-void my_exit(char *command, int status, char *extra);
+void my_error(char *command, int status, char *extra);
 
 void signal_handler(int sig);
 
@@ -145,6 +145,10 @@ char **do_env(char *x, char *y);
 
 
 /* builtin functions */
+
+int setenv_builtin(char **tokens);
+
+int unsetenv_builtin(char **tokens);
 
 int cd_builtin(char **tokens);
 
