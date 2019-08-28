@@ -49,7 +49,7 @@ void handle_file(char *filename)
 void main_loop(char *filename)
 {
 	char *buff = NULL, **tokens = NULL, *delim = " \n";
-	/* static char *history; */
+	int code = 0;
 	ssize_t lgetline = 0, buffsize = 4096;
 
 	if (filename)
@@ -71,7 +71,7 @@ void main_loop(char *filename)
 			if (lgetline == 0)/* exit if ctrl- d */
 			{
 				write(STDOUT_FILENO, "\n", 1);
-				do_exit(2, "", 0);
+				do_exit(2, "", code);
 			}
 			if (buff[lgetline - 1] != '\n') /* if ctrl- d and some text */
 			{
@@ -80,9 +80,9 @@ void main_loop(char *filename)
 				continue;
 			}
 			if ((_strcmp(buff, "exit\n")) == 0) /* check for exit command */
-				do_exit(2, "", 0);
+				do_exit(2, "", code);
 			tokens = _strtok(buff, delim); /* tokenize STDIN */
-			execute(tokens);
+			code = execute(tokens);
 			do_mem(0, buff);
 			free_double_array(tokens);
 			linum(1);
