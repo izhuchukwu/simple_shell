@@ -4,26 +4,6 @@
 #include <stdlib.h>
 
 /**
- * _getline2 - reads 1024 characters from stdin
- * Return: the string read in
- */
-char *_getline2()
-{
-	char *line = NULL, *word = NULL;
-	ssize_t lread;
-
-	/* mallocs word and checks if it fails */
-	while (!(word = do_mem(1024, NULL)))
-		return (NULL);
-
-	/* reads std input and checks if it fails */
-	while ((lread = read(STDIN_FILENO, line, 1024)) == -1)
-		return (NULL);
-
-	return (line);
-}
-
-/**
  * _getline - reads a number of chars from stdin
  * @lineptr: the buffer to put the data in
  * @n: the number of bytes to read
@@ -65,7 +45,7 @@ ssize_t _getline(char *lineptr, int stream)
 			ret = ret + 1;
 
 		/* Shift any remaining chars to the left */
-		shiftbuffer(input, newline_index, filled);
+		shiftbuffer(input, newline_index + 1, filled);
 		filled = filled - ret;
 
 		return (ret);
