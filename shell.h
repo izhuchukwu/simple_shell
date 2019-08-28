@@ -22,7 +22,7 @@ int linum(int add);
 
 char *get_prog_name(char *name);
 
-void my_exit(char *msg);
+void my_exit(char *command, int status, char *extra);
 
 void signal_handler(int sig);
 
