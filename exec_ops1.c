@@ -95,8 +95,6 @@ int execute(char **tokens)
 	int works = 0, op = 0;
 	char **head = NULL;
 	char **tail = NULL;
-	char **oldtail = NULL;
-	char **oldhead = NULL;
 
 	op = search_ops(tokens);
 	head = get_current_command(tokens);
@@ -115,15 +113,8 @@ int execute(char **tokens)
 			return (works);
 
 		op = search_ops(tail);
-		oldhead = head;
 		head = get_current_command(tail);
-		oldtail = tail;
 		tail = get_next_commands(tail);
-
-		if (oldhead)
-			free_double_array(oldhead);
-		if (oldtail)
-			free_double_array(oldtail);
 
 	}
 	return (1);
