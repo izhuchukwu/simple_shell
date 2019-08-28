@@ -34,7 +34,7 @@ char **_strtok(char *str, char *delim)
 		return (NULL);
 
 	/* tokenize str to individual words inside a double pointer*/
-	for (i = 0, len = 0, count = 0; str[i] || len; i++)
+	for (i = 0, len = 0, count = 0; str[i] || len;)
 	{
 		for (d = 0, check = 0; delim[d]; d++)
 		{
@@ -59,6 +59,8 @@ char **_strtok(char *str, char *delim)
 		}
 		if (!check)
 			len++;
+		if (str[i])
+			i++;
 	}
 	list[count] = NULL;
 	return (list);
