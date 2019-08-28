@@ -18,6 +18,8 @@ typedef struct list_p
 	struct list_p *next;
 } list_t;
 
+int linum(int add);
+
 void signal_handler(int sig);
 
 void main_loop(char *filename);

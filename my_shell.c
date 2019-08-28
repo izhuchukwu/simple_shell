@@ -3,6 +3,22 @@
 #include <stdlib.h>
 #include <signal.h>
 
+
+/**
+ * linum - get current line number and/or add to it
+ * @add: if not zero, add this amt
+ * Return: the line number
+ */
+int linum(int add)
+{
+	static int line;
+
+	line = line + add;
+	return (line);
+}
+
+
+
 /**
   * main - simple shell
   * @argc: Number of arguments
