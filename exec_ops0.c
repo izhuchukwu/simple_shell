@@ -3,6 +3,7 @@
 #include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
 /**
   * exec_builtin - execute function for builtins
@@ -80,15 +81,29 @@ int exec_nb(char **tokens)
 	char *comm = NULL;
 	char *path = NULL;
 	pid_t cpid, wid;
-	int status = 0;
+	int status = 0, accessCode = 0;
 
 	envVars = get_path();
 	path = find_path(envVars, tokens[0]);
 	if (!path)
 	{
 		/* if no path */
+
 	}
 	comm = get_full_command(path, tokens[0]);
+	/* check if path exists */
+	accessCode = access(comm, F_OK);
+	if(accessCode)
+	{
+		/* not found */
+	}
+
+	/* check if path is exucatable */
+	accessCode = access(comm, X_OK);
+	if(accessCode)
+	{
+		/* Permission denied */
+	}
 	/* fork and exec */
 	cpid = fork();
 	/* Fork failed - exits with error message and exit code */
