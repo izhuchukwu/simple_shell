@@ -44,36 +44,6 @@ int exec_builtin(char **tokens, int bcase)
 }
 
 /**
- * get_full_command - get the command with the correct path prepended
- * @path: all of the possible paths
- * @command: the base command
- * Return: the correct path + command (leave command alone if already done)
- */
-char *get_full_command(char *path, char *command)
-{
-	int i = 0, j = 0;
-	char *res = NULL;
-	char **tempsplit = NULL;
-
-	/* if command has any / in it, then return command */
-	tempsplit = _strtok(command, "/");
-	if (tempsplit && tempsplit[0] && tempsplit[1])
-	{
-		free_double_array(tempsplit);
-		return (command);
-	}
-	free_double_array(tempsplit);
-
-	/* else, concat the path with the command and a slash */
-	i = _strlen(path);
-	j = _strlen(command);
-	res = do_mem(sizeof(char) * (i + j + 1 + 1), NULL);
-	_strcat(res, path);
-	_strcat(res, "/");
-	_strcat(res, command);
-	return (res);
-}
-/**
  * check_access - checks if path exists or if permission exists for command
  * @comm: path to command
  * @token: command
@@ -102,25 +72,42 @@ int check_access(char *comm, char *token)
 }
 
 /**
+ * prep_execve - preps command by checking current path and then the PATH for command
+ * @token: commmand to check
+ * Return: command preped for execve
+ */
+char *prep_execve(char *token)
+{
+	char **envVars = NULL;
+	char *comm = NULL;
+	char *cwd = NULL;
+	char *path = NULL;
+	int accessCode = 0;
+
+	cwd = do_mem(100, NULL);
+	comm = get_full_command(cwd, token);
+	accessCode = access(comm , F_OK);
+	if (accessCode)
+	{
+		envVars = get_path();
+		path = find_path(envVars, token);
+		comm = get_full_command(path, token);
+		free_double_array(envVars);
+	}
+	return (comm);
+}
+/**
   * exec_nb - execute function for non builtins
   * @tokens: STDIN tokenized
   * Return: the exit status of the program, 0 if successful
   */
 int exec_nb(char **tokens)
 {
-	char **envVars = NULL;
 	char *comm = NULL;
-	char *path = NULL;
 	pid_t cpid, wid;
 	int status = 0, accessCode = 0;
 
-	envVars = get_path();
-	path = find_path(envVars, tokens[0]);
-	if (!path)
-	{
-		/* if no path */
-	}
-	comm = get_full_command(path, tokens[0]);
+	comm = prep_execve(tokens[0]);
 	while ((accessCode = check_access(comm, tokens[0])))
 		return(accessCode);
 	/* fork and exec */
@@ -137,7 +124,6 @@ int exec_nb(char **tokens)
 	else/* parent */
 	{
 		do {
-			free_double_array(envVars);
 			wid = waitpid(cpid, &status, WUNTRACED);
 			if (wid == -1)
 			{

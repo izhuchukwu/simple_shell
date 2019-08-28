@@ -105,3 +105,34 @@ char **get_env(void)
 {
 	return (do_env(NULL, NULL));
 }
+
+/**
+ * get_full_command - get the command with the correct path prepended
+ * @path: all of the possible paths
+ * @command: the base command
+ * Return: the correct path + command (leave command alone if already done)
+ */
+char *get_full_command(char *path, char *command)
+{
+	int i = 0, j = 0;
+	char *res = NULL;
+	char **tempsplit = NULL;
+
+	/* if command has any / in it, then return command */
+	tempsplit = _strtok(command, "/");
+	if (tempsplit && tempsplit[0] && tempsplit[1])
+	{
+		free_double_array(tempsplit);
+		return (command);
+	}
+	free_double_array(tempsplit);
+
+	/* else, concat the path with the command and a slash */
+	i = _strlen(path);
+	j = _strlen(command);
+	res = do_mem(sizeof(char) * (i + j + 1 + 1), NULL);
+	_strcat(res, path);
+	_strcat(res, "/");
+	_strcat(res, command);
+	return (res);
+}

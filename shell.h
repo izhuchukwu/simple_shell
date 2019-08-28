@@ -143,6 +143,7 @@ char **get_env();
 
 char **do_env(char *x, char *y);
 
+char *get_full_command(char *path, char *command);
 
 /* builtin functions */
 
@@ -167,6 +168,8 @@ int search_ops(char **tokens);
 int exec_builtin(char **tokens, int bcase);
 
 int check_access(char *comm, char *token);
+
+char *prep_execve(char *token);
 
 /* file functions */
 
