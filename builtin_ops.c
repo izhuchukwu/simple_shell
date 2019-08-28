@@ -42,6 +42,11 @@ int env_builtin(void)
 	return (0);
 }
 
+/**
+ * setenv_builtin - Set an environment variable
+ * @tokens: the tokens for the command
+ * Return: the return code
+ */
 int setenv_builtin(char **tokens)
 {
 	char *ret = NULL;
@@ -62,6 +67,11 @@ int setenv_builtin(char **tokens)
 	return (0);
 }
 
+/**
+ * unsetenv_builtin - Unset an environment variable
+ * @tokens: the tokens for the command
+ * Return: the return code
+ */
 int unsetenv_builtin(char **tokens)
 {
 
