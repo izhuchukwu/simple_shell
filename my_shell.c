@@ -42,6 +42,9 @@ int main(int argc, char **argv, char **envp)
 	/* initialize the environment */
 	do_env((char *)envp, NULL);
 
+	/* initialize the linum */
+	linum(1);
+
 	/* read, tokenize, execute loop */
 	main_loop(filename);
 

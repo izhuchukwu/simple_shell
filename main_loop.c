@@ -85,6 +85,7 @@ void main_loop(char *filename)
 			execute(tokens);
 			do_mem(0, buff);
 			free_double_array(tokens);
+			linum(1);
 		}
 	}
 }
