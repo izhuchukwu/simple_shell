@@ -26,7 +26,7 @@ int exec_builtin(char **tokens, int bcase)
 				{
 					do_exit(2, "numeric arguments only", exit);
 				}
-			exit = atoi(tokens[1]);
+			exit = _atoi(tokens[1]);
 		}
 		do_exit(2, "", exit);
 	}
