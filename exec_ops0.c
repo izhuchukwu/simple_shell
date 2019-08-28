@@ -22,10 +22,10 @@ int exec_builtin(char **tokens, int bcase)
 		{
 			for (; tokens[1][i]; i++)
 				if (!_isdigit(tokens[1][i]))
-					{
-						do_exit(2, "numeric arguments only", exit);
-					}
-		exit = atoi(tokens[1]);
+				{
+					do_exit(2, "numeric arguments only", exit);
+				}
+			exit = atoi(tokens[1]);
 		}
 		do_exit(2, "", exit);
 	case 2:
@@ -89,21 +89,17 @@ int exec_nb(char **tokens)
 	comm = get_full_command(path, tokens[0]);
 	/* fork and exec */
 	cpid = fork();
+	/* Fork failed - exits with error message and exit code */
 	if (cpid == -1)
-	{
-		/* Fork failed - exits with error message and exit code */
 		do_exit(2, "Fork failed", EXIT_FAILURE);
-	}
-	if (!cpid)
+	if (!cpid)/* child */
 	{
-		/* child */
 		execve(comm, tokens, (char * const *)get_env());
 		perror("");
 		do_exit(2, "Couldn't exec", EXIT_FAILURE);
 	}
-	else
+	else/* parent */
 	{
-		/* parent */
 		do {
 			free_double_array(envVars);
 			wid = waitpid(cpid, &status, WUNTRACED);

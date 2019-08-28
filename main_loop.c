@@ -50,9 +50,7 @@ void main_loop(char *filename)
 	ssize_t lgetline = 0, buffsize = 4096;
 
 	if (filename)
-	{
 		handle_file(filename);
-	}
 	else
 	{
 		while (1)
@@ -61,35 +59,26 @@ void main_loop(char *filename)
 			if (isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "$ ", 2);
 			buff = do_mem(buffsize, NULL);
-
 			/* read command, getline and check if it fails */
 			while ((lgetline = _getline(buff, STDIN_FILENO)) < 0)
 			{
 				do_mem(0, buff);
 				do_exit(2, "", -1);
 			}
-			
-			/* exit if ctrl- d */
-			if (lgetline == 0)
+			if (lgetline == 0)/* exit if ctrl- d */
 			{
 				write(STDOUT_FILENO, "\n", 1);
 				do_exit(2, "", 100);
 			}
-
-			/* if ctrl- d and some text */
-			if (buff[lgetline - 1] != '\n')
+			if (buff[lgetline - 1] != '\n') /* if ctrl- d and some text */
 			{
 				do_mem(0, buff);
 				write(STDOUT_FILENO, "\n", 1);
 				continue;
 			}
-			/* check for exit command */
-			if ((_strcmp(buff, "exit\n")) == 0)
+			if ((_strcmp(buff, "exit\n")) == 0) /* check for exit command */
 				do_exit(2, "", 100);
-
-			/* tokenize STDIN */
-			tokens = _strtok(buff, delim);
-
+			tokens = _strtok(buff, delim); /* tokenize STDIN */
 			execute(tokens);
 			do_mem(0, buff);
 			free_double_array(tokens);
