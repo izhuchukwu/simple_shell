@@ -70,13 +70,13 @@ void main_loop(char *filename)
 			}
 			if (lgetline == 0)/* exit if ctrl- d */
 			{
-				write(STDERR_FILENO, "\n", 1);
+				if (isatty(STDIN_FILENO))
+					write(STDERR_FILENO, "\n", 1);
 				do_exit(2, "", code);
 			}
 			if (buff[lgetline - 1] != '\n') /* if ctrl- d and some text */
 			{
 				do_mem(0, buff);
-				write(STDERR_FILENO, "\n", 1);
 				continue;
 			}
 			if ((_strcmp(buff, "exit\n")) == 0) /* check for exit command */
