@@ -68,9 +68,14 @@ void main_loop(char *filename)
 				do_mem(0, buff);
 				do_exit(2, "", -1);
 			}
+			
 			/* exit if ctrl- d */
 			if (lgetline == 0)
+			{
+				write(STDOUT_FILENO, "\n", 1);
 				do_exit(2, "", 100);
+			}
+
 			/* if ctrl- d and some text */
 			if (buff[lgetline - 1] != '\n')
 			{
