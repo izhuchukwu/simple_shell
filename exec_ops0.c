@@ -24,7 +24,7 @@ int exec_builtin(char **tokens, int bcase)
 			for (; tokens[1][i]; i++)
 				if (!_isdigit(tokens[1][i]))
 				{
-					do_exit(2, "numeric arguments only", exit);
+					do_exit(2, "numeric arguments only\n", exit);
 				}
 			exit = _atoi(tokens[1]);
 		}
@@ -126,7 +126,9 @@ int search_ops(char **tokens)
 	int i = 0;
 
 	if (!tokens)
+	{
 		return (0);
+	}
 	for (i = 0; tokens[i]; i++)
 	{
 		/* check for ;, &&, || */
