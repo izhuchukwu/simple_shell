@@ -2,8 +2,9 @@
 #include <stdio.h>
 
 /**
- * reverse_array - reverses the content of a string
+ * _reverse - reverses the content of a string
  * @str: string to reverse
+ * @n: lengeth of string
  * Return: reversed string
  */
 
@@ -29,7 +30,7 @@ char *_reverse(char *str, int n)
  * Return: integer in string format
  */
 
-char* _itoa(int num)
+char *_itoa(int num)
 {
     int i = 0, neg = 0, cnum = num, len, remainder = 0;
     char *str;
@@ -45,7 +46,6 @@ char* _itoa(int num)
         str[i] = '\0';
         return str;
     }
-
     /* check if negative number */
     if (num < 0)
     {
@@ -53,7 +53,6 @@ char* _itoa(int num)
         num = -num;
         len++;
     }
-
     /* malloc for size of string */
     str = do_mem((len + 1) * sizeof(char), NULL);
     /* handle individual numbers */
@@ -63,16 +62,13 @@ char* _itoa(int num)
         str[i++] = remainder + '0';
         num = num / 10;
     }
-
     /* Add negative sign if negatice */
     if (neg)
         str[i++] = '-';
-
     /* add null bite */
     str[i] = '\0';
-
     /* reverse string */
     _reverse(str, i);
 
-    return str;
+    return (str);
 }
