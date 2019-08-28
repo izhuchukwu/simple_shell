@@ -34,9 +34,9 @@ void handle_file(char *filename)
 	while (newline_index)
 	{
 		for (i = 0; i < newline_index; i++)
-			{
-				copyBuff[i] = buff[i];
-			}
+		{
+			copyBuff[i] = buff[i];
+		}
 		copyBuff[i] = '\0';
 		/* tokenize individual commands */
 		tokens = _strtok(copyBuff, " ");

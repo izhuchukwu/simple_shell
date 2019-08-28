@@ -69,6 +69,33 @@ char *get_full_command(char *path, char *command)
 	_strcat(res, command);
 	return (res);
 }
+/**
+ * check_access - checks if path exists or if permission exists for command
+ * @comm: path to command
+ * @token: command
+ * Return: exit condition
+ */
+int check_access(char *comm, char *token)
+{
+	int accessCode = 0;
+	/* check if path exists */
+	accessCode = access(comm, F_OK);
+	if (accessCode)
+	{
+		/* not found */
+		my_error(tokens[0], 2, NULL);
+		return (2);
+	}
+	/* check if path is exucatable */
+	accessCode = access(comm, X_OK);
+	if (accessCode)
+	{
+		/* Permission denied */
+		my_error(tokens[0], 126, NULL);
+		return (126);
+	}
+	return (0);
+}
 
 /**
   * exec_nb - execute function for non builtins
@@ -90,22 +117,8 @@ int exec_nb(char **tokens)
 		/* if no path */
 	}
 	comm = get_full_command(path, tokens[0]);
-	/* check if path exists */
-	accessCode = access(comm, F_OK);
-	if(accessCode)
-	{
-		/* not found */
-		my_error(tokens[0], 2, NULL);
-		return (2);
-	}
-	/* check if path is exucatable */
-	accessCode = access(comm, X_OK);
-	if(accessCode)
-	{
-		/* Permission denied */
-		my_error(tokens[0], 126, NULL);
-		return (126);
-	}
+	while ((accessCode = check_access(comm, token[0])))
+		return(accessCode)
 	/* fork and exec */
 	cpid = fork();
 	/* Fork failed - exits with error message and exit code */

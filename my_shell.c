@@ -52,10 +52,8 @@ void my_error(char *command, int status, char *extra)
 	write(STDERR_FILENO, line, _strlen(line));
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, msg, _strlen(msg));
-
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, command, _strlen(command));
-
 	write(STDERR_FILENO, ": ", 2);
 
 	switch (status)
