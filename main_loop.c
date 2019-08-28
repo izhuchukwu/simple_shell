@@ -8,6 +8,8 @@
  */
 void signal_handler(int sig)
 {
+	(void) sig;
+
 	write(STDOUT_FILENO, "\n$ ", 3);
 }
 /**
@@ -46,7 +48,7 @@ void handle_file(char *filename)
 void main_loop(char *filename)
 {
 	char *buff = NULL, **tokens = NULL, *delim = " \n";
-	static char *history;
+	/* static char *history; */
 	ssize_t lgetline = 0, buffsize = 4096;
 
 	if (filename)

@@ -113,6 +113,8 @@ void *do_mem(size_t size, void *ptr);
 
 void do_exit(int fd, char *msg, int code);
 
+ssize_t else_handle_input(char *lineptr, int stream, char *input, int filled);
+
 ssize_t _getline(char *lineptr, int stream);
 
 char **_strtok(char *str, char *delim);
@@ -136,7 +138,7 @@ int cd_builtin(char **tokens);
 
 char **get_builtins();
 
-int env_builtin(char **tokens);
+int env_builtin(void);
 
 /* execute functions */
 

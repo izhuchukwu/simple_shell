@@ -18,6 +18,7 @@ int exec_builtin(char **tokens, int bcase)
 	switch (bcase)
 	{
 	case 1:
+	{
 		if (tokens[1])
 		{
 			for (; tokens[1][i]; i++)
@@ -28,10 +29,11 @@ int exec_builtin(char **tokens, int bcase)
 			exit = atoi(tokens[1]);
 		}
 		do_exit(2, "", exit);
+	}
 	case 2:
 		return (cd_builtin(tokens));
 	case 3:
-		return (env_builtin(tokens));
+		return (env_builtin());
 	}
 	return (0);
 }
