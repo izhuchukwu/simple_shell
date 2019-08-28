@@ -41,9 +41,9 @@ char *get_prog_name(char *name)
  */
 void my_error(char *command, int status, char *extra)
 {
-	char *name;
-	char *line;
-	char *msg;
+	char *name = NULL;
+	char *line = NULL;
+	char *msg = NULL;
 
 	name = get_prog_name(NULL);
 	line = _itoa(linum(0));
