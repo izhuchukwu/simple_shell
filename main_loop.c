@@ -10,7 +10,7 @@ void signal_handler(int sig)
 {
 	(void) sig;
 
-	write(STDOUT_FILENO, "\n", 1);
+	write(STDERR_FILENO, "\n", 1);
 	write(STDERR_FILENO, "$ ", 2);
 }
 /**
@@ -70,13 +70,13 @@ void main_loop(char *filename)
 			}
 			if (lgetline == 0)/* exit if ctrl- d */
 			{
-				write(STDOUT_FILENO, "\n", 1);
+				write(STDERR_FILENO, "\n", 1);
 				do_exit(2, "", code);
 			}
 			if (buff[lgetline - 1] != '\n') /* if ctrl- d and some text */
 			{
 				do_mem(0, buff);
-				write(STDOUT_FILENO, "\n", 1);
+				write(STDERR_FILENO, "\n", 1);
 				continue;
 			}
 			if ((_strcmp(buff, "exit\n")) == 0) /* check for exit command */
