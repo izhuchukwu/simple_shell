@@ -28,11 +28,9 @@ char **_strtok(char *str, char *delim)
 	/* get count of words, if no words return NULL */
 	while (!(count = word_count(str, delim)))
 		return (NULL);
-
 	list = do_mem((count + 1) * sizeof(char *), NULL);
 	if (!list)
 		return (NULL);
-
 	/* tokenize str to individual words inside a double pointer*/
 	for (i = 0, len = 0, count = 0; str[i] || len;)
 	{
