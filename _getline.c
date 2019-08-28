@@ -14,7 +14,7 @@
 ssize_t else_handle_input(char *lineptr, int stream, char *input, int filled)
 {
 	int red;
-	char tmp = 2;
+	char tmp;
 
 	/* if the buffer is full then read until \n or EOF */
 	if (filled == 4096)

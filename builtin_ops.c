@@ -19,10 +19,9 @@ char **get_builtins()
 }
 /**
  * env_builtin - Lists environment
- * @tokens: standard input tokenized
  *  Return: 0 if successfull
  */
-int env_builtin(char **tokens)
+int env_builtin(void)
 {
 	char **env;
 	int i = 0, len = 0;
