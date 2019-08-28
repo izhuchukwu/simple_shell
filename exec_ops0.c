@@ -109,7 +109,7 @@ int exec_nb(char **tokens)
 
 	comm = prep_execve(tokens[0]);
 	while ((accessCode = check_access(comm, tokens[0])))
-		return(accessCode);
+		return (accessCode);
 	/* fork and exec */
 	cpid = fork();
 	/* Fork failed - exits with error message and exit code */
