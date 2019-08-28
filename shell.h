@@ -112,6 +112,10 @@ int has_newline(char *input);
 
 void shiftbuffer(char *input, int newline_index, int filled);
 
+char* _itoa(int num);
+
+char *_reverse(char *str, int n);
+
 /* Above find the string functions */
 
 
