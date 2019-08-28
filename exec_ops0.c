@@ -80,7 +80,7 @@ int exec_nb(char **tokens)
 	char *comm = NULL;
 	char *path = NULL;
 	pid_t cpid, wid;
-	int status;
+	int status = 0;
 
 	envVars = get_path();
 	path = find_path(envVars, tokens[0]);
