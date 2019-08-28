@@ -21,25 +21,33 @@ void handle_file(char *filename)
 {
 	char *buff = NULL;
 	char **tokens = NULL;
-	char **ftokens = NULL;
-	int i;
+	char *copyBuff = NULL;
+	int i, newline_index;
 
 	/* read file and write commands to a buff */
 	buff = do_mem(4096, NULL);
 	buff = read_textfile(filename);
 
 	/* separate commands in file */
-	tokens = _strtok(buff, "\n");
-	for (i = 0; tokens[i]; i++)
+	newline_index = has_newline(buff);
+	copyBuff = do_mem(4096, NULL);
+	while (newline_index)
 	{
+		for (i = 0; i < newline_index; i++)
+			{
+				copyBuff[i] = buff[i];
+			}
+		copyBuff[i] = '\0';
 		/* tokenize individual commands */
-		ftokens = _strtok(tokens[i], " ");
+		tokens = _strtok(copyBuff, " ");
 		/* execute commands */
-		execute(ftokens);
-		free_double_array(ftokens);
+		execute(tokens);
+		free_double_array(tokens);
+		copyBuff = _memset(copyBuff, '\0', newline_index);
+		shiftbuffer(buff, newline_index + 1, 4096);
+		newline_index = has_newline(buff);
 	}
 	do_mem(0, buff);
-	free_double_array(tokens);
 }
 
 /**
