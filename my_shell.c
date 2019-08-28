@@ -41,8 +41,8 @@ char *get_prog_name(char *name)
  */
 void my_error(char *command, int status, char *extra)
 {
-	char *name;
-	char *line;
+	char *name = NULL;
+	char *line = NULL;
 	char *msg = NULL;
 
 	name = get_prog_name(NULL);
@@ -53,7 +53,6 @@ void my_error(char *command, int status, char *extra)
 
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, command, _strlen(command));
-
 	write(STDERR_FILENO, ": ", 2);
 
 	switch (status)
