@@ -116,6 +116,8 @@ char *_itoa(int num);
 
 char *_reverse(char *str, int n);
 
+char *_memset(char *s, char b, int n);
+
 /* Above find the string functions */
 
 
