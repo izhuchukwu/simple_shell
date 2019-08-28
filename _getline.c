@@ -52,7 +52,6 @@ ssize_t _getline(char *lineptr, int stream)
 	static char input[4096];
 	static int filled;
 	int newline_index = -1, i = 0, red = 0;
-	char tmp = 2;
 	ssize_t ret = 0;
 
 	/* if the buffer is empty, fill it */
@@ -84,6 +83,6 @@ ssize_t _getline(char *lineptr, int stream)
 	}
 	/* if the buffer doesn't contain \n or EOF */
 	else
-		ssize_t else_handle_input(lineptr, stream, input, filled);
+		else_handle_input(lineptr, stream, input, filled);
 	return (-1);
 }

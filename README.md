@@ -76,7 +76,7 @@ gcc -Wall -Wextra -Werror -pedantic *.c -o hsh
 
 5. [ll_ops2.c](ll_ops2.c) - More linked list functions
 * ``char **arrayify(list_s *head)`` - copy a char * linked list into a char **
-* ``list_s listify(char **arr)`` - copy a char ** array into a malloc'd char * linked list 
+* ``list_s listify(char **arr)`` - copy a char ** array into a malloc'd char * linked list
 * ``void free_double_array(char **list)`` - Free a double char pointer
 
 6. [str_ops0.c](str_ops0.c) - String functions
