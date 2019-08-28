@@ -29,6 +29,7 @@ int exec_builtin(char **tokens, int bcase)
 			exit = _atoi(tokens[1]);
 		}
 		do_exit(2, "", exit);
+		break;
 	}
 	case 2:
 		return (cd_builtin(tokens));
