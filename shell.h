@@ -162,6 +162,8 @@ int search_ops(char **tokens);
 
 int exec_builtin(char **tokens, int bcase);
 
+int check_access(char *comm, char *token);
+
 /* file functions */
 
 char *read_textfile(char *filename);

@@ -83,7 +83,7 @@ int check_access(char *comm, char *token)
 	if (accessCode)
 	{
 		/* not found */
-		my_error(tokens[0], 2, NULL);
+		my_error(token, 2, NULL);
 		return (2);
 	}
 	/* check if path is exucatable */
@@ -91,7 +91,7 @@ int check_access(char *comm, char *token)
 	if (accessCode)
 	{
 		/* Permission denied */
-		my_error(tokens[0], 126, NULL);
+		my_error(token, 126, NULL);
 		return (126);
 	}
 	return (0);
@@ -117,8 +117,8 @@ int exec_nb(char **tokens)
 		/* if no path */
 	}
 	comm = get_full_command(path, tokens[0]);
-	while ((accessCode = check_access(comm, token[0])))
-		return(accessCode)
+	while ((accessCode = check_access(comm, tokens[0])))
+		return(accessCode);
 	/* fork and exec */
 	cpid = fork();
 	/* Fork failed - exits with error message and exit code */
