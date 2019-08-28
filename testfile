@@ -1,1 +1,10 @@
+echo hello
 ls -l
+echo two
+cd
+ls -l
+echo three 
+cd -
+ls -l
+echo finished!!
+echo last
