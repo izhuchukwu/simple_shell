@@ -72,7 +72,7 @@ int check_access(char *comm, char *token)
 }
 
 /**
- * prep_execve - preps command by checking current path and then the PATH for command
+ * prep_execve - preps cmd by checking current path and then the PATH for cmd
  * @token: commmand to check
  * Return: command preped for execve
  */
@@ -86,7 +86,7 @@ char *prep_execve(char *token)
 
 	cwd = do_mem(100, NULL);
 	comm = get_full_command(cwd, token);
-	accessCode = access(comm , F_OK);
+	accessCode = access(comm, F_OK);
 	if (accessCode)
 	{
 		envVars = get_path();
