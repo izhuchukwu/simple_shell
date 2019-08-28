@@ -10,7 +10,8 @@ void signal_handler(int sig)
 {
 	(void) sig;
 
-	write(STDOUT_FILENO, "\n$ ", 3);
+	write(STDOUT_FILENO, "\n", 1);
+	write(STDERR_FILENO, "$ ", 2);
 }
 /**
  * handle_file - parses through list of commands in a file and executes
@@ -59,7 +60,7 @@ void main_loop(char *filename)
 		{
 			/* only print a prompt if isatty is true */
 			if (isatty(STDIN_FILENO))
-				write(STDOUT_FILENO, "$ ", 2);
+				write(STDERR_FILENO, "$ ", 2);
 			buff = do_mem(buffsize, NULL);
 			/* read command, getline and check if it fails */
 			while ((lgetline = _getline(buff, STDIN_FILENO)) < 0)
