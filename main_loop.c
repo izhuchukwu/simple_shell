@@ -71,7 +71,7 @@ void main_loop(char *filename)
 			if (lgetline == 0)/* exit if ctrl- d */
 			{
 				write(STDOUT_FILENO, "\n", 1);
-				do_exit(2, "", 100);
+				do_exit(2, "", 0);
 			}
 			if (buff[lgetline - 1] != '\n') /* if ctrl- d and some text */
 			{
@@ -80,7 +80,7 @@ void main_loop(char *filename)
 				continue;
 			}
 			if ((_strcmp(buff, "exit\n")) == 0) /* check for exit command */
-				do_exit(2, "", 100);
+				do_exit(2, "", 0);
 			tokens = _strtok(buff, delim); /* tokenize STDIN */
 			execute(tokens);
 			do_mem(0, buff);

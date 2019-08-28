@@ -20,6 +20,10 @@ typedef struct list_p
 
 int linum(int add);
 
+char *get_prog_name(char *name);
+
+void my_exit(char *msg);
+
 void signal_handler(int sig);
 
 void main_loop(char *filename);

@@ -17,6 +17,40 @@ int linum(int add)
 	return (line);
 }
 
+/**
+ * get_prog_name - gets the program name
+ * @name: the name of the prog (first execution)
+ * Return: the name of the program
+ */
+char *get_prog_name(char *name)
+{
+	static char *ret;
+
+	if (!ret)
+	{
+		ret = name;
+	}
+	return (ret);
+}
+
+/**
+ * my_error - custom error printing
+ * @msg: the message to print
+ */
+void my_error(char *msg)
+{
+	char *name;
+	char *line;
+
+	name = get_prog_name(NULL);
+	line = _itoa(linum(0));
+	write(STDERR_FILENO, name, _strlen(name));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, line, _strlen(line));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, msg, _strlen(msg));
+	write(STDERR_FILENO, "\n", 1);
+}
 
 
 /**
@@ -29,6 +63,8 @@ int linum(int add)
 int main(int argc, char **argv, char **envp)
 {
 	char *filename = NULL;
+
+	get_prog_name(argv[0]);
 
 	/* argc the right amount of arguments */
 	if (argc > 2)
