@@ -94,7 +94,7 @@ int has_newline(char *input)
 		/*searches for \n, new line */
 		if (input[i] == '\n')
 			return (i);
-		
+
 		/* check if EOF */
 		/*
 		*if (input[1] == '-1')
@@ -117,14 +117,14 @@ void shiftbuffer(char *input, int newline_index, int filled)
 	/* shift and place back to beggining */
 	int i = newline_index;
 	int j = 0;
-	
+
 	for (; i < filled; i++, j++)
 	{
 		/* copy */
 		input[j] = input[i];
 	}
 	/* fills remainder with '\0' */
-	for (;j < 4096; j++)
+	for (; j < 4096; j++)
 	{
 		input[j] = '\0';
 	}
