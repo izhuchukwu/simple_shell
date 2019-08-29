@@ -3,7 +3,7 @@
 .B hsh
 - Simple shell based on the Bourne shell
 .SH SYNOPSIS
-.B hsh [options][file]
+.B hsh [file]
 .SH DESCRIPTION
 .B hsh
 is a simple command language interpreter that executes commands read from the standard input or from a file. Based on the Bourne shell.
