@@ -16,12 +16,19 @@ is a simple command language interpreter that executes commands read from the st
 - set an environmental variable
 .IP unsetenv
 - deletes an environmental variable
-.IP history
-- prints history of standard input
-.IP help
-- prints out explanation on how to use builtin commands
 .IP exit [status]
 - exits the shell with no leaks
+.SH EXAMPLES
+.IP cd:
+cd directory/to/change/to
+.IP env:
+ env
+.IP setenv:
+setenv VARIABLENAME VALUE
+.IP unsetenv:
+unsetenv VARIABLENAME
+.IP exit:
+exit 127
 .SH BUGS
 No current bugs. If any bugs are found please email <jose.alvarez-de-lugo@holbertonschool.com> or <william.dyrlandmarquis@holbertonschool.com>
 .SH AUTHORS
