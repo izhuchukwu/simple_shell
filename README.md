@@ -55,7 +55,27 @@ echo Hello World
 ./hsh testfile
 Hello World
 ```
-
+## Examples
+cd:
+```bash
+$ cd directory/to/change/to
+```
+env:
+```bash
+$ env
+```
+setenv:
+```bash
+$ setenv VARIABLENAME VALUE
+```
+unsetenv:
+```bash
+$ unsetenv VARIABLENAME
+```
+exit:
+```bash
+$ exit 127
+```
 ## File Structure
 
 0. [my_shell.c](my_shell.c) - The main function for simple_shell
