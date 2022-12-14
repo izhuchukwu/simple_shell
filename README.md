@@ -180,5 +180,5 @@ $ exit 127
 
 ## Authors
 
-* Jose Alvarez de Lugo
-* William Dyrland-Marquis
+* Izhuchukwu Ugwoha
+* Princewill Charles
